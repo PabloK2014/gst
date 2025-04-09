@@ -14,7 +14,7 @@ export const categoryService = {
         return response.data;
     },
 
-    createCategory: async (category: Omit<Category, 'id'>): Promise<Category> => {
+    createCategory: async (category: Category): Promise<Category> => {
         const response = await axios.post(`${API_URL}/categories`, category);
         return response.data;
     },
