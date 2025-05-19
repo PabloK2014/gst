@@ -1,11 +1,10 @@
 import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
-import { workshopService } from '../services/workshopService'
+import { workshopService, Category } from '../services/workshopService'
 import { Product } from '../services/productService'
-import { FaShoppingCart, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
+import { FaShoppingCart, FaTimes } from 'react-icons/fa'
 import { userService } from '../services/userService'
 import { orderService } from '../services/orderService'
-import { categoryContents } from '../types/categoryContent'
 import clsx from 'clsx'
 
 const Workshop = () => {
@@ -14,7 +13,8 @@ const Workshop = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
-  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const [categoryData, setCategoryData] = useState<Category | null>(null)
+
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -22,42 +22,23 @@ const Workshop = () => {
   })
 
   useEffect(() => {
-    const loadProducts = async () => {
+    const loadData = async () => {
       if (category) {
         setLoading(true)
-        const data = await workshopService.getProductsByCategory(category)
-        setProducts(data)
+        const [products, categoryInfo] = await Promise.all([
+          workshopService.getProductsByCategory(category),
+          workshopService.getCategoryByName(category)
+        ])
+        setProducts(products)
+        setCategoryData(categoryInfo)
         setLoading(false)
       }
     }
 
-    loadProducts()
+    loadData()
   }, [category])
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (category && categoryContents[category]) {
-        const images = categoryContents[category].images
-        setCurrentImageIndex((prev) => (prev + 1) % images.length)
-      }
-    }, 3000)
 
-    return () => clearInterval(interval)
-  }, [category])
-
-  const handlePrevImage = () => {
-    if (category && categoryContents[category]) {
-      const images = categoryContents[category].images
-      setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)
-    }
-  }
-
-  const handleNextImage = () => {
-    if (category && categoryContents[category]) {
-      const images = categoryContents[category].images
-      setCurrentImageIndex((prev) => (prev + 1) % images.length)
-    }
-  }
 
   const handleOrder = async (product: Product) => {
     setSelectedProduct(product)
@@ -126,42 +107,12 @@ const Workshop = () => {
       <div className="w-full h-full">
         <div className="container mx-auto px-8 py-6">
           <h1 className="text-3xl font-bold text-primary mb-6 capitalize">
-            {category && getCategoryTitle(category)}
+            {categoryData?.name || 'Услуги'}
           </h1>
 
-          {category && categoryContents[category] && (
-            <div className="mb-12 flex flex-col lg:flex-row gap-8">
-              <div className="lg:w-1/2 text-white">
-                <p className="text-gray-300 text-lg">{categoryContents[category].description}</p>
-              </div>
-              <div className="lg:w-1/2 relative h-72 w-full overflow-hidden rounded-xl shadow-xl">
-                {categoryContents[category].images.map((img, idx) => (
-                  <img
-                    key={img}
-                    src={img}
-                    alt={`Фото ${idx + 1}`}
-                    className={clsx(
-                      'absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out',
-                      {
-                        'opacity-100 z-10': idx === currentImageIndex,
-                        'opacity-0 z-0': idx !== currentImageIndex
-                      }
-                    )}
-                  />
-                ))}
-                <button
-                  onClick={handlePrevImage}
-                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 p-2 rounded-full text-white z-20"
-                >
-                  <FaChevronLeft size={20} />
-                </button>
-                <button
-                  onClick={handleNextImage}
-                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 p-2 rounded-full text-white z-20"
-                >
-                  <FaChevronRight size={20} />
-                </button>
-              </div>
+          {categoryData && categoryData.description && (
+            <div className="mb-8">
+              <p className="text-gray-300 text-lg">{categoryData.description}</p>
             </div>
           )}
 
