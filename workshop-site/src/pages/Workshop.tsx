@@ -2,9 +2,11 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { workshopService } from '../services/workshopService'
 import { Product } from '../services/productService'
-import { FaShoppingCart } from 'react-icons/fa'
+import { FaShoppingCart, FaTimes, FaChevronLeft, FaChevronRight } from 'react-icons/fa'
 import { userService } from '../services/userService'
 import { orderService } from '../services/orderService'
+import { categoryContents } from '../types/categoryContent'
+import clsx from 'clsx'
 
 const Workshop = () => {
   const { category } = useParams()
@@ -12,6 +14,7 @@ const Workshop = () => {
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [products, setProducts] = useState<Product[]>([])
   const [loading, setLoading] = useState(true)
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
   const [formData, setFormData] = useState({
     name: '',
     phone: '',
@@ -31,6 +34,31 @@ const Workshop = () => {
     loadProducts()
   }, [category])
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (category && categoryContents[category]) {
+        const images = categoryContents[category].images
+        setCurrentImageIndex((prev) => (prev + 1) % images.length)
+      }
+    }, 3000)
+
+    return () => clearInterval(interval)
+  }, [category])
+
+  const handlePrevImage = () => {
+    if (category && categoryContents[category]) {
+      const images = categoryContents[category].images
+      setCurrentImageIndex((prev) => (prev - 1 + images.length) % images.length)
+    }
+  }
+
+  const handleNextImage = () => {
+    if (category && categoryContents[category]) {
+      const images = categoryContents[category].images
+      setCurrentImageIndex((prev) => (prev + 1) % images.length)
+    }
+  }
+
   const handleOrder = async (product: Product) => {
     setSelectedProduct(product)
     try {
@@ -48,7 +76,6 @@ const Workshop = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
-    console.log('submit')
     if (!selectedProduct) return
 
     try {
@@ -75,7 +102,7 @@ const Workshop = () => {
 
   const getCategoryTitle = (categoryName: string) => {
     switch (categoryName.toLowerCase()) {
-      case 'welding':
+      case 'сварка':
         return 'Сварочные работы'
       case 'laboratory':
         return 'Лабораторные работы'
@@ -101,6 +128,44 @@ const Workshop = () => {
           <h1 className="text-3xl font-bold text-primary mb-6 capitalize">
             {category && getCategoryTitle(category)}
           </h1>
+
+          {category && categoryContents[category] && (
+            <div className="mb-12 flex flex-col lg:flex-row gap-8">
+              <div className="lg:w-1/2 text-white">
+                <p className="text-gray-300 text-lg">{categoryContents[category].description}</p>
+              </div>
+              <div className="lg:w-1/2 relative h-72 w-full overflow-hidden rounded-xl shadow-xl">
+                {categoryContents[category].images.map((img, idx) => (
+                  <img
+                    key={img}
+                    src={img}
+                    alt={`Фото ${idx + 1}`}
+                    className={clsx(
+                      'absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ease-in-out',
+                      {
+                        'opacity-100 z-10': idx === currentImageIndex,
+                        'opacity-0 z-0': idx !== currentImageIndex
+                      }
+                    )}
+                  />
+                ))}
+                <button
+                  onClick={handlePrevImage}
+                  className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 p-2 rounded-full text-white z-20"
+                >
+                  <FaChevronLeft size={20} />
+                </button>
+                <button
+                  onClick={handleNextImage}
+                  className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-black bg-opacity-50 hover:bg-opacity-75 p-2 rounded-full text-white z-20"
+                >
+                  <FaChevronRight size={20} />
+                </button>
+              </div>
+            </div>
+          )}
+
+          <div className="w-full h-px bg-gray-700 my-8" />
 
           {products.length === 0 ? (
             <div className="text-center text-gray-300 py-12">
