@@ -180,10 +180,10 @@ const Home = () => {
                     </p>
                   </div>
                   <Link
-                    to={`/workshop/${category}`}
+                    to={category.toLowerCase() === 'сварка' ? '/welding-workshop' : `/workshop/${category}`}
                     className="inline-block bg-secondary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition-colors self-start"
                   >
-                    Посмотреть услуги
+                    {category.toLowerCase() === 'сварка' ? 'Посмотреть примеры' : 'Посмотреть примеры'}
                   </Link>
                 </div>
               </div>

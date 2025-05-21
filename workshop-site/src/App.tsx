@@ -3,8 +3,8 @@ import { useState } from 'react'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Workshop from './pages/Workshop'
+import WeldingWorkshop from './pages/WeldingWorkshop'
 import Admin from './pages/Admin'
-import Orders from './pages/Orders'
 import Login from './pages/Login'
 import Registration from './pages/Registration'
 import Header from './components/Header'
@@ -28,6 +28,7 @@ function App() {
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />
               <Route path="/workshop/:category" element={<Workshop />} />
+              <Route path="/welding-workshop" element={<WeldingWorkshop />} />
               <Route path="/admin" element={<ProtectedRoute><Admin /></ProtectedRoute>} />
               <Route path="/orders" element={<UserOrders />} />
               <Route path="/login" element={<Login />} />

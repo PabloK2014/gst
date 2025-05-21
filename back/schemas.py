@@ -13,7 +13,7 @@ class UserProfile(BaseModel):
     created_at: Optional[datetime] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class UserCreate(BaseModel):
@@ -24,7 +24,7 @@ class UserCreate(BaseModel):
     avatar: Optional[str] = None  
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class ProductBase(BaseModel):
@@ -42,7 +42,7 @@ class Product(ProductBase):
     created_at: datetime
 
     class Config:
-        orm_mode = True  
+        from_attributes = True
 
 class UserLogin(BaseModel):
     email: EmailStr
@@ -60,9 +60,11 @@ class OrderResponse(OrderBase):
     id: int
     status: str
     created_at: datetime
+    product: Optional[Product] = None
+    user: Optional[UserProfile] = None
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class CategoryBase(BaseModel):
     name: str
@@ -75,7 +77,7 @@ class Category(CategoryBase):
     id: int  
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 
 class ProductBase(BaseModel):
@@ -93,7 +95,7 @@ class Product(ProductBase):
     created_at: datetime
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class ProductShort(BaseModel):
     name: str
@@ -102,14 +104,15 @@ class ProductShort(BaseModel):
     price: float
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 
 class OrderResponse(OrderBase):
     id: int
     status: str
     created_at: datetime
-    product: ProductShort 
+    product: ProductShort
+    user: Optional[UserProfile]
 
     class Config:
-        orm_mode = True
+        from_attributes = True
 

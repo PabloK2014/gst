@@ -38,7 +38,6 @@ def delete_category(category_id: int, session: Session = Depends(get_session)):
     if category is None:
         raise HTTPException(status_code=404, detail="Категория не найдена")
     
-    # Обновляем category_id связанных товаров на null
     stmt = update(Product).where(Product.category_id == category_id).values(category_id=None)
     session.execute(stmt)
     
