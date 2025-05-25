@@ -13,46 +13,46 @@ interface Equipment {
     photo: string;
 }
 
-const WeldingWorkshop: React.FC = () => {
+const CulinaryWorkshop: React.FC = () => {
     // Временные данные для демонстрации
     const equipment: Equipment[] = [
         {
-            name: 'Сварочный аппарат MIG-250',
-            description: 'Профессиональный сварочный аппарат для полуавтоматической сварки',
-            photo: '/src/assets/Мастерские/Сварка/верстак.jpg'
+            name: 'Профессиональная плита',
+            description: 'Промышленная плита с 6 конфорками и двумя духовыми шкафами',
+            photo: '/src/assets/Мастерские/Поварское дело/плита.jpg'
         },
         {
-            name: 'Аппарат плазменной резки CUT-40',
-            description: 'Аппарат для точной плазменной резки металла',
-            photo: '/src/assets/Мастерские/Сварка/верстак 2.jpg'
+            name: 'Холодильное оборудование',
+            description: 'Промышленный холодильник для хранения продуктов',
+            photo: '/src/assets/Мастерские/Поварское дело/холодильник.jpg'
         },
         {
-            name: 'Аппарат плазменной резки CUT-40',
-            description: 'Аппарат для точной плазменной резки металла',
-            photo: '/src/assets/Мастерские/Сварка/Вадим.jpg'
+            name: 'Кухонный комбайн',
+            description: 'Профессиональный кухонный комбайн для обработки продуктов',
+            photo: '/src/assets/Мастерские/Поварское дело/комбайн.jpg'
         },
     ];
 
     const masters: Master[] = [
         {
             id: 1,
-            name: 'Малюгин Вадим Григорьевич',
-            photo: '/src/assets/Мастерские/Сварка/malugin.jpg'
+            name: 'Иванова Мария Петровна',
+            photo: '/src/assets/Мастерские/Поварское дело/мастер1.jpg'
         },
         {
             id: 2,
-            name: 'Аринин Александр николаевич',
-            photo: '/src/assets/Мастерские/Сварка/Александр.jpg'
+            name: 'Петров Иван Сергеевич',
+            photo: '/src/assets/Мастерские/Поварское дело/мастер2.jpg'
         },
     ];
 
     const workExamples = [
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример1.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
+        '/src/assets/Мастерские/Поварское дело/пример1.jpg',
+        '/src/assets/Мастерские/Поварское дело/пример2.jpg',
+        '/src/assets/Мастерские/Поварское дело/пример3.jpg',
+        '/src/assets/Мастерские/Поварское дело/пример4.jpg',
+        '/src/assets/Мастерские/Поварское дело/пример5.jpg',
+        '/src/assets/Мастерские/Поварское дело/пример6.jpg',
     ];
 
     const [currentMasterIndex, setCurrentMasterIndex] = useState(0);
@@ -86,23 +86,23 @@ const WeldingWorkshop: React.FC = () => {
         <div className="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
                 <h1 className="text-4xl font-bold text-primary mb-12 text-center">
-                    Сварочная мастерская
+                    Кулинарная мастерская
                 </h1>
                 <div className="bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
                     <h1 className="text-4xl font-bold text-primary mb-6">
                         Добро пожаловать в ГСТ
                     </h1>
                     <h2 className="text-2xl font-semibold mb-6 text-white">
-                        О нашем техникуме
+                        О нашей кулинарной мастерской
                     </h2>
                     <p className="text-gray-300 mb-4 text-lg">
-                        Гуковсикй строительный техникум (ГСТ) - это современное образовательное учреждение,
-                        где студенты получают качественное профессиональное образование в области строительства
-                        и смежных специальностей.
+                        В нашей кулинарной мастерской студенты обучаются искусству приготовления пищи
+                        под руководством опытных мастеров. Мы используем современное профессиональное
+                        оборудование и качественные ингредиенты.
                     </p>
                     <p className="text-gray-300 text-lg">
-                        Наши мастерские оснащены современным оборудованием и предоставляют широкий спектр
-                        услуг как для обучения студентов, так и для выполнения заказов.
+                        Наша мастерская предоставляет услуги по приготовлению блюд для различных
+                        мероприятий, а также проводит мастер-классы по кулинарному искусству.
                     </p>
                 </div>
 
@@ -181,7 +181,7 @@ const WeldingWorkshop: React.FC = () => {
                             >
                                 <img
                                     src={photo}
-                                    alt={`Пример сварочной работы ${index + 1}`}
+                                    alt={`Пример кулинарной работы ${index + 1}`}
                                     className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                     onError={(e) => {
                                         e.currentTarget.src = '/src/assets/placeholder.jpg';
@@ -196,7 +196,7 @@ const WeldingWorkshop: React.FC = () => {
                 {selectedImage && (
                     <div
                         className="fixed inset-0 bg-black bg-opacity-75 flex items-center justify-center z-50 transition-opacity duration-300"
-                        onClick={() => setSelectedImage(null)}
+                        onClick={closeModal}
                     >
                         <div className="relative max-w-4xl max-h-[90vh] mx-4">
                             <img
@@ -206,7 +206,7 @@ const WeldingWorkshop: React.FC = () => {
                                 onClick={(e) => e.stopPropagation()}
                             />
                             <button
-                                onClick={() => setSelectedImage(null)}
+                                onClick={closeModal}
                                 className="absolute -top-4 -right-4 bg-black bg-opacity-50 hover:bg-opacity-75 p-2 rounded-full text-white transition-all hover:scale-110"
                             >
                                 <FaTimes size={24} />
@@ -219,4 +219,4 @@ const WeldingWorkshop: React.FC = () => {
     );
 };
 
-export default WeldingWorkshop;
+export default CulinaryWorkshop;

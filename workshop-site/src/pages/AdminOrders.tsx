@@ -59,20 +59,22 @@ export default function AdminOrders() {
   const handleStatusChange = async (orderId: number, newStatus: string) => {
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://localhost:8000/api/v1/orders/${orderId}/status`, {
+      const response = await fetch(`http://localhost:8000/api/v1/orders/${orderId}/status?status=${newStatus}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,
           'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          new_status: newStatus
-        })
+        }
       })
 
+      const data = await response.json()
+      
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.detail || 'Ошибка при обновлении статуса заказа')
+        console.error('Server response:', data)
+        const errorMessage = Array.isArray(data.detail)
+          ? data.detail.join(', ')
+          : data.detail || 'Ошибка при обновлении статуса заказа'
+        throw new Error(errorMessage)
       }
 
       setOrders(orders.map(order => {
@@ -83,7 +85,11 @@ export default function AdminOrders() {
       }))
     } catch (error) {
       console.error('Error updating order status:', error)
-      alert('Ошибка при обновлении статуса заказа')
+      if (error instanceof Error) {
+        alert(error.message)
+      } else {
+        alert('Произошла неизвестная ошибка при обновлении статуса')
+      }
     }
   }
 

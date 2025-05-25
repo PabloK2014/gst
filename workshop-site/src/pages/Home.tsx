@@ -55,6 +55,12 @@ const Home = () => {
         return 'Сварочные работы'
       case 'поварское дело':
         return 'Поварское дело'
+      case 'каменные работы':
+        return 'Каменные работы'
+      case 'столярные работы':
+        return 'Столярные работы'
+      case 'сантехнические работы':
+        return 'Сантехнические работы'
       default:
         return 'Услуги'
     }
@@ -72,7 +78,7 @@ const Home = () => {
             О нашем техникуме
           </h2>
           <p className="text-gray-300 mb-4 text-lg">
-            Городской строительный техникум (ГСТ) - это современное образовательное учреждение,
+            Гуковсикй строительный техникум (ГСТ) - это современное образовательное учреждение,
             где студенты получают качественное профессиональное образование в области строительства
             и смежных специальностей.
           </p>
@@ -180,10 +186,17 @@ const Home = () => {
                     </p>
                   </div>
                   <Link
-                    to={category.toLowerCase() === 'сварка' ? '/welding-workshop' : `/workshop/${category}`}
+                    to={
+                      category.toLowerCase() === 'сварка' ? '/welding-workshop' :
+                      category.toLowerCase() === 'каменные работы' ? '/masonry-workshop' :
+                      category.toLowerCase() === 'столярные работы' ? '/carpentry-workshop' :
+                      category.toLowerCase() === 'сантехнические работы' ? '/plumbing-workshop' :
+                      category.toLowerCase() === 'поварское дело' ? '/culinary-workshop' :
+                      `/workshop/${category}`
+                    }
                     className="inline-block bg-secondary text-white px-8 py-4 rounded-lg text-lg font-semibold hover:bg-orange-600 transition-colors self-start"
                   >
-                    {category.toLowerCase() === 'сварка' ? 'Посмотреть примеры' : 'Посмотреть примеры'}
+                    Посмотреть примеры
                   </Link>
                 </div>
               </div>

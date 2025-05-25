@@ -13,46 +13,45 @@ interface Equipment {
     photo: string;
 }
 
-const WeldingWorkshop: React.FC = () => {
-    // Временные данные для демонстрации
+const CarpentryWorkshop: React.FC = () => {
     const equipment: Equipment[] = [
         {
-            name: 'Сварочный аппарат MIG-250',
-            description: 'Профессиональный сварочный аппарат для полуавтоматической сварки',
-            photo: '/src/assets/Мастерские/Сварка/верстак.jpg'
+            name: 'Фрезерный станок',
+            description: 'Профессиональный фрезерный станок для обработки древесины',
+            photo: '/src/assets/Мастерские/Столярные/milling.jpg'
         },
         {
-            name: 'Аппарат плазменной резки CUT-40',
-            description: 'Аппарат для точной плазменной резки металла',
-            photo: '/src/assets/Мастерские/Сварка/верстак 2.jpg'
+            name: 'Токарный станок по дереву',
+            description: 'Станок для точной токарной обработки древесины',
+            photo: '/src/assets/Мастерские/Столярные/lathe.jpg'
         },
         {
-            name: 'Аппарат плазменной резки CUT-40',
-            description: 'Аппарат для точной плазменной резки металла',
-            photo: '/src/assets/Мастерские/Сварка/Вадим.jpg'
+            name: 'Ленточная пила',
+            description: 'Профессиональная ленточная пила для распила древесины',
+            photo: '/src/assets/Мастерские/Столярные/saw.jpg'
         },
     ];
 
     const masters: Master[] = [
         {
             id: 1,
-            name: 'Малюгин Вадим Григорьевич',
-            photo: '/src/assets/Мастерские/Сварка/malugin.jpg'
+            name: 'Сиденко Роман Владимирович',
+            photo: '/src/assets/Мастерские/Столярные/master1.jpg'
         },
         {
             id: 2,
-            name: 'Аринин Александр николаевич',
-            photo: '/src/assets/Мастерские/Сварка/Александр.jpg'
+            name: 'Зайцев Виталий Александрович',
+            photo: '/src/assets/Мастерские/Столярные/master2.jpg'
         },
     ];
 
     const workExamples = [
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример1.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
+        '/src/assets/Мастерские/Столярные/example1.jpg',
+        '/src/assets/Мастерские/Столярные/example2.jpg',
+        '/src/assets/Мастерские/Столярные/example3.jpg',
+        '/src/assets/Мастерские/Столярные/example4.jpg',
+        '/src/assets/Мастерские/Столярные/example5.jpg',
+        '/src/assets/Мастерские/Столярные/example6.jpg',
     ];
 
     const [currentMasterIndex, setCurrentMasterIndex] = useState(0);
@@ -86,7 +85,7 @@ const WeldingWorkshop: React.FC = () => {
         <div className="min-h-screen bg-gray-900 py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto">
                 <h1 className="text-4xl font-bold text-primary mb-12 text-center">
-                    Сварочная мастерская
+                    Мастерская столярных работ
                 </h1>
                 <div className="bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
                     <h1 className="text-4xl font-bold text-primary mb-6">
@@ -96,7 +95,7 @@ const WeldingWorkshop: React.FC = () => {
                         О нашем техникуме
                     </h2>
                     <p className="text-gray-300 mb-4 text-lg">
-                        Гуковсикй строительный техникум (ГСТ) - это современное образовательное учреждение,
+                        Гуковский строительный техникум (ГСТ) - это современное образовательное учреждение,
                         где студенты получают качественное профессиональное образование в области строительства
                         и смежных специальностей.
                     </p>
@@ -106,7 +105,6 @@ const WeldingWorkshop: React.FC = () => {
                     </p>
                 </div>
 
-                {/* Секция с оборудованием */}
                 <div className="mb-16 bg-gray-800 rounded-xl p-8">
                     <h2 className="text-3xl font-bold text-primary mb-8">Наше оборудование</h2>
                     <div className="grid md:grid-cols-2 gap-8">
@@ -136,7 +134,6 @@ const WeldingWorkshop: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Слайдер с мастерами */}
                 <div className="mb-16 bg-gray-800 rounded-xl p-8">
                     <h2 className="text-3xl font-bold text-primary mb-8">Наши мастера</h2>
                     <div className="relative">
@@ -169,7 +166,6 @@ const WeldingWorkshop: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Галерея примеров работ */}
                 <div className="bg-gray-800 rounded-xl p-8">
                     <h2 className="text-3xl font-bold text-primary mb-8">Примеры наших работ</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -181,7 +177,7 @@ const WeldingWorkshop: React.FC = () => {
                             >
                                 <img
                                     src={photo}
-                                    alt={`Пример сварочной работы ${index + 1}`}
+                                    alt={`Пример столярной работы ${index + 1}`}
                                     className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                     onError={(e) => {
                                         e.currentTarget.src = '/src/assets/placeholder.jpg';
@@ -219,4 +215,4 @@ const WeldingWorkshop: React.FC = () => {
     );
 };
 
-export default WeldingWorkshop;
+export default CarpentryWorkshop;
