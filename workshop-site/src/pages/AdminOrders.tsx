@@ -16,6 +16,7 @@ interface Order {
   status: string
   total_amount: number
   created_at: string
+  comment: string
 }
 
 export default function AdminOrders() {
@@ -217,8 +218,8 @@ export default function AdminOrders() {
                   <div className="text-sm text-gray-900 dark:text-white">
                     {order.product.name}
                   </div>
-                  <div className="text-sm text-gray-500 dark:text-gray-300 truncate max-w-xs">
-                    {order.product.description}
+                  <div className="text-sm text-gray-400 mt-1 italic max-w-xs">
+                    {order.comment || '—'} 
                   </div>
                 </td>
                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500 dark:text-gray-300">

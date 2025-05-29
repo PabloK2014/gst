@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './Login.css';
 
@@ -12,7 +12,7 @@ const Login = () => {
         navigate('/register');
     };
 
-    const handleLoginSubmit = async (event) => {
+    const handleLoginSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
         const userData = {

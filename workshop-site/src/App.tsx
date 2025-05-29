@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
-import { useState } from 'react'
 import Home from './pages/Home'
 import Profile from './pages/Profile'
 import Workshop from './pages/Workshop'
@@ -16,17 +15,18 @@ import ProtectedRoute from './components/ProtectedRoute'
 import Header from './components/Header'
 import Sidebar from './components/Sidebar'
 
+import ScrollToTop from './components/ScrollToTop'
 
 function App() {
-  const [sidebarOpen, setSidebarOpen] = useState(false)
-
+  
   return (
     <Router>
       <div className="flex flex-col min-h-screen w-full bg-gray-900">
         <Header />
         <div className="flex flex-1">
-          <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+          <Sidebar  />
           <main className="flex-1 bg-gray-900">
+          <ScrollToTop />
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/profile" element={<Profile />} />

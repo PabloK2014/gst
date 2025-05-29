@@ -62,12 +62,11 @@ const Admin = () => {
     const formData = new FormData(form);
 
     try {
-      const productData: ProductCreate = {
+      const productData: Omit<ProductCreate, 'image'> = {
         name: formData.get('name') as string,
         description: formData.get('description') as string,
         price: Number(formData.get('price')),
-        category_id: Number(formData.get('category')),
-        image: editingProduct?.image 
+        category_id: Number(formData.get('category'))
       };
 
       if (editingProduct) {

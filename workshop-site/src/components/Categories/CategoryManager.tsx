@@ -4,7 +4,6 @@ import { TrashIcon } from '@heroicons/react/24/outline';
 
 export const CategoryManager: React.FC = () => {
     const [categories, setCategories] = useState<Category[]>([]);
-    const [isNullCategoriesOpen, setIsNullCategoriesOpen] = useState(false);
     const [newCategory, setNewCategory] = useState({ 
         name: '', 
         description: '' 

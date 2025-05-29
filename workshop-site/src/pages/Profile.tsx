@@ -51,7 +51,7 @@ const Profile = () => {
           avatar: data.avatar || null
         })
       } catch (error) {
-        setError(error.message)
+        setError((error as Error).message)
       } finally {
         setLoading(false)
       }
@@ -101,7 +101,7 @@ const Profile = () => {
         throw new Error('Не получен URL аватара')
       }
     } catch (error) {
-      setError(`Ошибка загрузки аватара: ${error.message}`)
+      setError(`Ошибка загрузки аватара: ${(error as Error).message}`)
     }
   }
 
@@ -146,7 +146,7 @@ const Profile = () => {
       }
       setSaveStatus('Изменения успешно сохранены')
     } catch (error) {
-      setSaveStatus(`Ошибка: ${error.message}`)
+      setSaveStatus(`Ошибка: ${(error as Error).message}`)
     }
   }
 

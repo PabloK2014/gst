@@ -1,31 +1,35 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import { useState } from 'react'
+import axios from 'axios'
 
 const ProfilePictureUpload = () => {
-    const [file, setFile] = useState(null);
+  const [file, setFile] = useState<File | null>(null)
 
-    const handleFileChange = (event) => {
-        setFile(event.target.files[0]);
-    };
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    if (event.target.files && event.target.files.length > 0) {
+        setFile(event.target.files[0])
+    }
+  }
 
-    const handleUpload = async () => {
-        const formData = new FormData();
-        formData.append('profilePicture', file);
+  const handleUpload = async () => {
+    if (!file) return
 
-        try {
-            await axios.post('/api/users/upload-profile-picture', formData);
-            // Обработка успешной загрузки
-        } catch (error) {
-            // Обработка ошибки
-        }
-    };
+    const formData = new FormData()
+    formData.append('profilePicture', file)
 
-    return (
-        <div>
-            <input type="file" onChange={handleFileChange} />
-            <button onClick={handleUpload}>Загрузить фото профиля</button>
-        </div>
-    );
-};
+    try {
+      await axios.post('/api/users/upload-profile-picture', formData)
+      console.log('Фото загружено успешно')
+    } catch (error) {
+      console.error('Ошибка загрузки:', error)
+    }
+  }
 
-export default ProfilePictureUpload;
+  return (
+    <div>
+      <input type="file" onChange={handleFileChange} />
+      <button onClick={handleUpload}>Загрузить фото профиля</button>
+    </div>
+  )
+}
+
+export default ProfilePictureUpload

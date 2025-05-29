@@ -56,6 +56,7 @@ class Order(Base):
     total_amount = Column(Float)
     created_at = Column(DateTime, default=datetime.utcnow)
     is_deleted = Column(Boolean, default=False)
+    comment = Column(String)
 
     user = relationship("User")
     product = relationship("Product")

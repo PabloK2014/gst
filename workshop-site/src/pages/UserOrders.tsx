@@ -14,6 +14,7 @@ interface Order {
   status: string
   total_amount: number
   created_at: string
+  comment: string
 }
 
 export default function UserOrders() {
@@ -116,12 +117,14 @@ export default function UserOrders() {
                       Заказ #{order.id}
                     </h3>
                     <p className="text-gray-300">{order.product.name}</p>
+                    <p className="text-gray-300">{order.comment}</p>
                   </div>
                 </div>
                 <div className="text-right">
                   <div className="text-lg font-bold text-primary">
                     {order.total_amount} ₽
                   </div>
+                  
                   <div className="text-sm text-gray-400">
                     {new Date(order.created_at).toLocaleString()}
                   </div>

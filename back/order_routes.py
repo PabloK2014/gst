@@ -16,6 +16,7 @@ async def create_order(order: OrderCreate, db: Session = Depends(get_session)):
         product_id=order.product_id,
         status="pending",
         total_amount=order.total_amount,
+        comment=order.comment,
         created_at=datetime.utcnow()
     )
     db.add(db_order)

@@ -2,10 +2,9 @@ import { useParams } from 'react-router-dom'
 import { useState, useEffect } from 'react'
 import { workshopService, Category } from '../services/workshopService'
 import { Product } from '../services/productService'
-import { FaShoppingCart, FaTimes } from 'react-icons/fa'
+import { FaShoppingCart } from 'react-icons/fa'
 import { userService } from '../services/userService'
 import { orderService } from '../services/orderService'
-import clsx from 'clsx'
 
 const Workshop = () => {
   const { category } = useParams()
@@ -78,19 +77,6 @@ const Workshop = () => {
     } catch (error) {
       console.error('Error creating order:', error)
       alert('Ошибка при создании заказа. Попробуйте позже.')
-    }
-  }
-
-  const getCategoryTitle = (categoryName: string) => {
-    switch (categoryName.toLowerCase()) {
-      case 'сварка':
-        return 'Сварочные работы'
-      case 'laboratory':
-        return 'Лабораторные работы'
-      case 'cooking':
-        return 'Поварские работы'
-      default:
-        return 'Услуги'
     }
   }
 
