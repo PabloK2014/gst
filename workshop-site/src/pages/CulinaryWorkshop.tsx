@@ -36,23 +36,23 @@ const CulinaryWorkshop: React.FC = () => {
     const masters: Master[] = [
         {
             id: 1,
-            name: 'Иванова Мария Петровна',
-            photo: '/src/assets/Мастерские/Поварское дело/мастер1.jpg'
+            name: 'Хорольская Олеся Валерьевна',
+            photo: '/src/assets/Мастерские/Повар/Хорольская.jpg'
         },
         {
             id: 2,
-            name: 'Петров Иван Сергеевич',
+            name: 'Гусина Любовь Владимировна',
             photo: '/src/assets/Мастерские/Поварское дело/мастер2.jpg'
         },
     ];
 
     const workExamples = [
-        '/src/assets/Мастерские/Поварское дело/пример1.jpg',
-        '/src/assets/Мастерские/Поварское дело/пример2.jpg',
-        '/src/assets/Мастерские/Поварское дело/пример3.jpg',
-        '/src/assets/Мастерские/Поварское дело/пример4.jpg',
-        '/src/assets/Мастерские/Поварское дело/пример5.jpg',
-        '/src/assets/Мастерские/Поварское дело/пример6.jpg',
+        '/src/assets/Мастерские/Повар/пример1.jpg',
+        '/src/assets/Мастерские/Повар/пример2.jpg',
+        '/src/assets/Мастерские/Повар/пример3.jpg',
+        '/src/assets/Мастерские/Повар/пример4.jpg',
+        '/src/assets/Мастерские/Повар/пример1.jpg',
+        '/src/assets/Мастерские/Повар/пример1.jpg',
     ];
 
     const [currentMasterIndex, setCurrentMasterIndex] = useState(0);

@@ -18,7 +18,7 @@ const MasonryWorkshop: React.FC = () => {
         {
             name: 'Бетономешалка промышленная',
             description: 'Профессиональная бетономешалка для приготовления строительных растворов',
-            photo: '/src/assets/Мастерские/Каменные/mixer.jpg'
+            photo: '/src/assets/Мастерские/Камень/оборудование1.jpg'
         },
         {
             name: 'Камнерезный станок',
@@ -36,7 +36,7 @@ const MasonryWorkshop: React.FC = () => {
         {
             id: 1,
             name: 'Лесников Игорь Юрьевич',
-            photo: '/src/assets/Мастерские/Каменные/master1.jpg'
+            photo: '/src/assets/Мастерские/Камень/Лесников.jpg'
         },
         {
             id: 2,
@@ -46,12 +46,8 @@ const MasonryWorkshop: React.FC = () => {
     ];
 
     const workExamples = [
-        '/src/assets/Мастерские/Каменные/example1.jpg',
-        '/src/assets/Мастерские/Каменные/example2.jpg',
-        '/src/assets/Мастерские/Каменные/example3.jpg',
-        '/src/assets/Мастерские/Каменные/example4.jpg',
-        '/src/assets/Мастерские/Каменные/example5.jpg',
-        '/src/assets/Мастерские/Каменные/example6.jpg',
+        '/src/assets/Мастерские/Камень/пример1.jpg',
+        '/src/assets/Мастерские/Камень/фото.jpg',
     ];
 
     const [currentMasterIndex, setCurrentMasterIndex] = useState(0);

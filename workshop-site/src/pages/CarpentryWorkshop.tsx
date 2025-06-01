@@ -46,12 +46,12 @@ const CarpentryWorkshop: React.FC = () => {
     ];
 
     const workExamples = [
-        '/src/assets/Мастерские/Столярные/example1.jpg',
-        '/src/assets/Мастерские/Столярные/example2.jpg',
-        '/src/assets/Мастерские/Столярные/example3.jpg',
-        '/src/assets/Мастерские/Столярные/example4.jpg',
-        '/src/assets/Мастерские/Столярные/example5.jpg',
-        '/src/assets/Мастерские/Столярные/example6.jpg',
+        '/src/assets/Мастерские/Столяр/пример4.jpg',
+        '/src/assets/Мастерские/Столяр/пример3.jpg',
+        '/src/assets/Мастерские/Столяр/стол .jpg',
+        '/src/assets/Мастерские/Столяр/стол2.jpg',
+        '/src/assets/Мастерские/Столяр/фото1.jpg',
+        '/src/assets/Мастерские/Столяр/фото2.jpg',
     ];
 
     const [currentMasterIndex, setCurrentMasterIndex] = useState(0);

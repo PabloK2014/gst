@@ -105,7 +105,7 @@ export default function OrderDetails({ orderId, onClose, onDelete }: OrderDetail
             <h3 className="text-xl font-semibold text-white">
               {order.product.name}
             </h3>
-            <p className="text-gray-300">{order.product.description}</p>
+            <p className="text-gray-300">Комментарий: {order.comment || '—'}</p>
           </div>
 
           <div className="flex justify-between items-center text-white">

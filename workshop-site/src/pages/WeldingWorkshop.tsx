@@ -26,33 +26,29 @@ const WeldingWorkshop: React.FC = () => {
             description: 'Аппарат для точной плазменной резки металла',
             photo: '/src/assets/Мастерские/Сварка/верстак 2.jpg'
         },
-        {
-            name: 'Аппарат плазменной резки CUT-40',
-            description: 'Аппарат для точной плазменной резки металла',
-            photo: '/src/assets/Мастерские/Сварка/Вадим.jpg'
-        },
+        
     ];
 
     const masters: Master[] = [
         {
             id: 1,
             name: 'Малюгин Вадим Григорьевич',
-            photo: '/src/assets/Мастерские/Сварка/malugin.jpg'
+            photo: '/src/assets/Мастерские/Сварка/Малюгин.jpg'
         },
         {
             id: 2,
             name: 'Аринин Александр николаевич',
-            photo: '/src/assets/Мастерские/Сварка/Александр.jpg'
+            photo: '/src/assets/Мастерские/Сварка/Аринин.png'
         },
     ];
 
     const workExamples = [
         '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
         '/src/assets/Мастерские/Сварка/пример1.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
+        '/src/assets/Мастерские/Сварка/пример2.jpg',
+        '/src/assets/Мастерские/Сварка/пример3.jpg',
+        '/src/assets/Мастерские/Сварка/пример4.jpg',
+        '/src/assets/Мастерские/Сварка/пример5.jpg',
     ];
 
     const [currentMasterIndex, setCurrentMasterIndex] = useState(0);
