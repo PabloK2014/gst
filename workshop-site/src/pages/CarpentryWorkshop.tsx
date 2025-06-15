@@ -32,6 +32,69 @@ const CarpentryWorkshop: React.FC = () => {
         },
     ];
 
+    const additionalEquipment = {
+        handTools: {
+            marking: [
+                { name: 'Рулетка', quantity: 10 },
+                { name: 'Линейка', quantity: 15 },
+                { name: 'Угольник', quantity: 11 },
+                { name: 'Уровень', quantity: 3 },
+                { name: 'Рейсмус', quantity: 1 },
+                { name: 'Отвес', quantity: 2 },
+                { name: 'Разметочный шнур', quantity: 1 }
+            ],
+            sawing: [
+                { name: 'Ножовка для продольного пиления', quantity: 15 },
+                { name: 'Ножовка для поперечного пиления', quantity: 15 },
+                { name: 'Двуручная пила', quantity: 2 },
+                { name: 'Лучковая пила', quantity: 2 }
+            ],
+            planing: [
+                { name: 'Рубанок', quantity: 13 },
+                { name: 'Фуганок', quantity: 4 }
+            ],
+            chiseling: [
+                { name: 'Стамеска плоская 16мм', quantity: 13 },
+                { name: 'Стамеска плоская 12мм', quantity: 9 },
+                { name: 'Стамеска плоская 8мм', quantity: 10 },
+                { name: 'Стамеска плоская 6мм', quantity: 5 }
+            ],
+            drilling: [
+                { name: 'Коловорот', quantity: 5 },
+                { name: 'Перовое сверло, центровое сверло', quantity: 47 }
+            ],
+            auxiliary: [
+                { name: 'Молоток', quantity: 13 },
+                { name: 'Киянка деревянная', quantity: 13 },
+                { name: 'Киянка деревянная резиновая', quantity: 3 },
+                { name: 'Клещи', quantity: 5 },
+                { name: 'Струбцины', quantity: 5 },
+                { name: 'Гвоздодёр', quantity: 3 },
+                { name: 'Напильники', quantity: 10 }
+            ]
+        },
+        powerTools: [
+            { name: 'Электрорубанок', quantity: 1 },
+            { name: 'Ручная циркулярная пила', quantity: 1 },
+            { name: 'Электролобзик', quantity: 3 },
+            { name: 'Дрель', quantity: 2 },
+            { name: 'Перфоратор', quantity: 1 },
+            { name: 'Шлифовальные машины', quantity: 2 },
+            { name: 'Пила торцовочная', quantity: 1 },
+            { name: 'Пылесос', quantity: 1 },
+            { name: 'Шуруповерт', quantity: 3 },
+            { name: 'Фрезерная машина', quantity: 1 },
+            { name: 'Комплект эл. гравера', quantity: 1 }
+        ],
+        fixtures: [
+            { name: 'Шкаф для хранения инструментов', quantity: 2 },
+            { name: 'Стеллажи для хранения материалов', quantity: 4 },
+            { name: 'Шкаф для спец. одежды обучающихся', quantity: 1 },
+            { name: 'Спецодежда', quantity: 1, unit: 'компл' },
+            { name: 'Рабочее место – столярный верстак с тисками', quantity: 15 }
+        ]
+    };
+
     const masters: Master[] = [
         {
             id: 1,
@@ -48,7 +111,7 @@ const CarpentryWorkshop: React.FC = () => {
     const workExamples = [
         '/src/assets/Мастерские/Столяр/пример4.jpg',
         '/src/assets/Мастерские/Столяр/пример3.jpg',
-        '/src/assets/Мастерские/Столяр/стол .jpg',
+        '/src/assets/Мастерские/Столяр/стол.jpg',
         '/src/assets/Мастерские/Столяр/стол2.jpg',
         '/src/assets/Мастерские/Столяр/фото1.jpg',
         '/src/assets/Мастерские/Столяр/фото2.jpg',
@@ -56,6 +119,7 @@ const CarpentryWorkshop: React.FC = () => {
 
     const [currentMasterIndex, setCurrentMasterIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [showMoreEquipment, setShowMoreEquipment] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -127,6 +191,87 @@ const CarpentryWorkshop: React.FC = () => {
                                 </div>
                             ))}
                         </div>
+                    </div>
+                    <div className="mt-8">
+                        <button
+                            onClick={() => setShowMoreEquipment(!showMoreEquipment)}
+                            className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors"
+                        >
+                            {showMoreEquipment ? 'Скрыть' : 'Показать еще'}
+                        </button>
+                        {showMoreEquipment && (
+                            <div className="mt-6 space-y-6">
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Ручной инструмент</h3>
+                                    <div className="space-y-4">
+                                        <div>
+                                            <h4 className="text-lg font-semibold text-gray-300">Разметочный</h4>
+                                            <ul className="text-gray-300 list-disc pl-5">
+                                                {additionalEquipment.handTools.marking.map((item, index) => (
+                                                    <li key={index}>{item.name} ({item.quantity} шт)</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-lg font-semibold text-gray-300">Для пиления</h4>
+                                            <ul className="text-gray-300 list-disc pl-5">
+                                                {additionalEquipment.handTools.sawing.map((item, index) => (
+                                                    <li key={index}>{item.name} ({item.quantity} шт)</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-lg font-semibold text-gray-300">Для строгания</h4>
+                                            <ul className="text-gray-300 list-disc pl-5">
+                                                {additionalEquipment.handTools.planing.map((item, index) => (
+                                                    <li key={index}>{item.name} ({item.quantity} шт)</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-lg font-semibold text-gray-300">Для долбления</h4>
+                                            <ul className="text-gray-300 list-disc pl-5">
+                                                {additionalEquipment.handTools.chiseling.map((item, index) => (
+                                                    <li key={index}>{item.name} ({item.quantity} шт)</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-lg font-semibold text-gray-300">Для сверления</h4>
+                                            <ul className="text-gray-300 list-disc pl-5">
+                                                {additionalEquipment.handTools.drilling.map((item, index) => (
+                                                    <li key={index}>{item.name} ({item.quantity} шт)</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                        <div>
+                                            <h4 className="text-lg font-semibold text-gray-300">Вспомогательный инструмент</h4>
+                                            <ul className="text-gray-300 list-disc pl-5">
+                                                {additionalEquipment.handTools.auxiliary.map((item, index) => (
+                                                    <li key={index}>{item.name} ({item.quantity} шт)</li>
+                                                ))}
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Электроинструмент</h3>
+                                    <ul className="text-gray-300 list-disc pl-5">
+                                        {additionalEquipment.powerTools.map((item, index) => (
+                                            <li key={index}>{item.name} ({item.quantity} шт)</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Приспособления, принадлежности, инвентарь</h3>
+                                    <ul className="text-gray-300 list-disc pl-5">
+                                        {additionalEquipment.fixtures.map((item, index) => (
+                                            <li key={index}>{item.name} ({item.quantity} {item.unit || 'шт'})</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        )}
                     </div>
                 </div>
 

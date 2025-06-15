@@ -1,7 +1,7 @@
 import axios from 'axios'
 import { Order } from '../types/order'
 
-const API_URL = 'http://localhost:8000/api/v1'
+const API_URL = 'https://backend-api-production-4c70.up.railway.app/api/v1'
 
 export const orderService = {
   async getOrders(): Promise<Order[]> {

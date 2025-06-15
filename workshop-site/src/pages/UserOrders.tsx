@@ -31,7 +31,7 @@ export default function UserOrders() {
       try {
         const currentUser = await userService.getCurrentUser();
         const token = localStorage.getItem('access_token');
-        const response = await fetch(`http://localhost:8000/api/v1/orders/user/${currentUser.id}`, {
+        const response = await fetch(`https://backend-api-production-4c70.up.railway.app/api/v1/orders/user/${currentUser.id}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'

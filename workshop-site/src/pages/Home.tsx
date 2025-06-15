@@ -142,7 +142,7 @@ const Home = () => {
                 <div className="md:w-1/3">
                     <div className="aspect-square bg-gray-700 rounded-lg overflow-hidden">
                         <img
-                            src="\src\assets\Демиденко Валентина Ивановна.jpg"
+                            src="/assets/Демиденко Валентина Ивановна.jpg"
                             alt="Демиденко Валентина Ивановна"
                             className="w-full h-full object-cover"
                         />

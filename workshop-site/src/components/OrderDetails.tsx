@@ -16,7 +16,7 @@ export default function OrderDetails({ orderId, onClose, onDelete }: OrderDetail
     const fetchOrderDetails = async () => {
       try {
         const token = localStorage.getItem('access_token')
-        const response = await fetch(`http://localhost:8000/api/v1/orders/${orderId}`, {
+        const response = await fetch(`https://backend-api-production-4c70.up.railway.app/api/v1/orders/${orderId}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export default function OrderDetails({ orderId, onClose, onDelete }: OrderDetail
     try {
       setDeleting(true)
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://localhost:8000/api/v1/orders/${orderId}/delete`, {
+      const response = await fetch(`https://backend-api-production-4c70.up.railway.app/api/v1/orders/${orderId}/delete`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,

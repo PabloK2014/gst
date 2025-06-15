@@ -41,7 +41,7 @@ async def create_product(
         with open(file_location, "wb") as f:
             f.write(await image.read())
         
-        db_product.image = f"http://localhost:8000/static/products/{filename}"
+        db_product.image = f"static/products/{filename}"
         session.commit()
     
     return db_product
@@ -83,7 +83,7 @@ async def update_product(
     if image:
         try:
             if product.image:
-                image_path = product.image.replace("http://localhost:8000/static/products/", "")
+                image_path = product.image.replace("/static/products/", "")
                 old_image_path = UPLOAD_DIR / image_path
                 if os.path.exists(old_image_path):
                     os.remove(old_image_path)
@@ -96,7 +96,7 @@ async def update_product(
             with open(file_location, "wb") as f:
                 f.write(image_content)
             
-            product.image = f"http://localhost:8000/static/products/{filename}"
+            product.image = f"/static/products/{filename}"
         except Exception as e:
             raise HTTPException(status_code=500, detail=f"Ошибка при обновлении изображения: {str(e)}")
     
@@ -117,7 +117,7 @@ def delete_product(product_id: int, session: Session = Depends(get_session)):
         
         if product.image:
             try:
-                image_path = product.image.replace("http://localhost:8000/static/products/", "")
+                image_path = product.image.replace("/static/products/", "")
                 image_file_path = UPLOAD_DIR / image_path
                 if os.path.exists(image_file_path):
                     os.remove(image_file_path)

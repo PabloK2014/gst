@@ -1,4 +1,5 @@
 export interface Order {
+  comment: string
   id: number
   product: {
     name: string

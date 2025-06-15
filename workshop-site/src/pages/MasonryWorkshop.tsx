@@ -16,42 +16,81 @@ interface Equipment {
 const MasonryWorkshop: React.FC = () => {
     const equipment: Equipment[] = [
         {
-            name: 'Бетономешалка промышленная',
+            name: 'Камнерезный станок DIAM SK 800/2.2',
             description: 'Профессиональная бетономешалка для приготовления строительных растворов',
-            photo: '/src/assets/Мастерские/Камень/оборудование1.jpg'
+            photo: '/assets/Мастерские/Камень/stanok.jpg'
         },
         {
             name: 'Камнерезный станок',
             description: 'Станок для точной резки камня и плитки',
-            photo: '/src/assets/Мастерские/Каменные/cutter.jpg'
-        },
-        {
-            name: 'Строительный уровень',
-            description: 'Профессиональный лазерный уровень для точной разметки',
-            photo: '/src/assets/Мастерские/Каменные/level.jpg'
+            photo: '/assets/Мастерские/Камень/оборудование1.jpg'
         },
     ];
 
+    const additionalEquipment = {
+        machines: [
+            { name: 'Камнерезный станок DIAM SK 800/2.2', quantity: 3 }
+        ],
+        tools: [
+            { name: 'Верстак', quantity: 6 },
+            { name: 'Растворный ящик', quantity: 6 },
+            { name: 'Ведро', quantity: 20 },
+            { name: 'Лопата совковая', quantity: 6 },
+            { name: 'Щетка для уборки', quantity: 6 },
+            { name: 'Совок для уборки', quantity: 6 },
+            { name: 'Правило 2м', quantity: 6 },
+            { name: 'Кельма каменщика', quantity: 6 },
+            { name: 'Расшивка для формирования швов плоская', quantity: 6 },
+            { name: 'Расшивка для формирования швов вогнутая', quantity: 6 },
+            { name: 'Молоток-кирочка', quantity: 6 },
+            { name: 'Киянка резиновая', quantity: 6 },
+            { name: 'Нож строительный', quantity: 6 },
+            { name: 'Рулетка', quantity: 6 },
+            { name: 'Металлическая линейка', quantity: 6 },
+            { name: 'Уровень строительный 600 мм', quantity: 6 },
+            { name: 'Уровень строительный 1000 мм', quantity: 6 },
+            { name: 'Уровень строительный 1500 мм', quantity: 6 },
+            { name: 'Угольник металлический 300 мм', quantity: 6 },
+            { name: 'Уровень электронный 600мм', quantity: 6 },
+            { name: 'Электронный угломер', quantity: 6 },
+            { name: 'Щетка сметка', quantity: 6 },
+            { name: 'Тачка строительная', quantity: 3 },
+            { name: 'Строительный миксер', quantity: 4 },
+            { name: 'Контейнер для строительных отходов 120л', quantity: 3 },
+            { name: 'Контейнер для бытовых отходов 240л', quantity: 2 },
+            { name: 'Часы настенные', quantity: 2 },
+            { name: 'Огнетушитель', quantity: 2 }
+        ],
+        ppe: [
+            { name: 'Спецодежда', quantity: 25, unit: 'компл' },
+            { name: 'Защитная обувь', quantity: 25, unit: 'пар' },
+            { name: 'Рукавицы', quantity: 25, unit: 'пар' },
+            { name: 'Защитные очки', quantity: 12, unit: 'шт' },
+            { name: 'Кепка', quantity: 25, unit: 'шт' },
+            { name: 'Аптечка', quantity: 1, unit: 'шт' }
+        ]
+    };
     const masters: Master[] = [
         {
             id: 1,
             name: 'Лесников Игорь Юрьевич',
-            photo: '/src/assets/Мастерские/Камень/Лесников.jpg'
+            photo: '/assets/Мастерские/Камень/Лесников.jpg'
         },
         {
             id: 2,
             name: 'Сидоров Михаил Петрович',
-            photo: '/src/assets/Мастерские/Каменные/master2.jpg'
+            photo: '/assets/Мастерские/Каменные/master2.jpg'
         },
     ];
 
     const workExamples = [
-        '/src/assets/Мастерские/Камень/пример1.jpg',
-        '/src/assets/Мастерские/Камень/фото.jpg',
+        '/assets/Мастерские/Камень/пример1.jpg',
+        '/assets/Мастерские/Камень/фото.jpg',
     ];
 
     const [currentMasterIndex, setCurrentMasterIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [showMoreEquipment, setShowMoreEquipment] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -71,10 +110,6 @@ const MasonryWorkshop: React.FC = () => {
 
     const openModal = (image: string) => {
         setSelectedImage(image);
-    };
-
-    const closeModal = () => {
-        setSelectedImage(null);
     };
 
     return (
@@ -128,8 +163,43 @@ const MasonryWorkshop: React.FC = () => {
                             ))}
                         </div>
                     </div>
+                    <div className="mt-8">
+                        <button
+                            onClick={() => setShowMoreEquipment(!showMoreEquipment)}
+                            className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors"
+                        >
+                            {showMoreEquipment ? 'Скрыть' : 'Показать еще'}
+                        </button>
+                        {showMoreEquipment && (
+                            <div className="mt-6 space-y-6">
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Станки</h3>
+                                    <ul className="text-gray-300 list-disc pl-5">
+                                        {additionalEquipment.machines.map((item, index) => (
+                                            <li key={index}>{item.name} ({item.quantity} шт)</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Инструменты и приспособления</h3>
+                                    <ul className="text-gray-300 list-disc pl-5">
+                                        {additionalEquipment.tools.map((item, index) => (
+                                            <li key={index}>{item.name} ({item.quantity} шт)</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Индивидуальные средства защиты</h3>
+                                    <ul className="text-gray-300 list-disc pl-5">
+                                        {additionalEquipment.ppe.map((item, index) => (
+                                            <li key={index}>{item.name} ({item.quantity} {item.unit || 'шт'})</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
-
                 <div className="mb-16 bg-gray-800 rounded-xl p-8">
                     <h2 className="text-3xl font-bold text-primary mb-8">Наши мастера</h2>
                     <div className="relative">

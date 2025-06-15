@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'http://localhost:8000';
+const API_URL = 'https://backend-api-production-4c70.up.railway.app';
 
 export interface User {
     id: number;

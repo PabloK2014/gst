@@ -10,10 +10,10 @@ export interface Category {
 export const workshopService = {
   async getProductsByCategory(categoryName: string): Promise<Product[]> {
     try {
-      const response = await axios.get(`http://localhost:8000/api/products`);
+      const response = await axios.get(`https://backend-api-production-4c70.up.railway.app/api/products`);
       const products = response.data;
       
-      const categoryResponse = await axios.get(`http://localhost:8000/api/v1/categories`);
+      const categoryResponse = await axios.get(`https://backend-api-production-4c70.up.railway.app/api/v1/categories`);
       const categories = categoryResponse.data;
       const category = categories.find((c: any) => 
         c.name.toLowerCase() === categoryName.toLowerCase()
@@ -32,7 +32,7 @@ export const workshopService = {
 
   async getCategoryByName(categoryName: string): Promise<Category | null> {
     try {
-      const response = await axios.get(`http://localhost:8000/api/v1/categories`);
+      const response = await axios.get(`https://backend-api-production-4c70.up.railway.app/api/v1/categories`);
       const categories = response.data;
       return categories.find((c: Category) => 
         c.name.toLowerCase() === categoryName.toLowerCase()

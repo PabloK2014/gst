@@ -14,20 +14,74 @@ interface Equipment {
 }
 
 const WeldingWorkshop: React.FC = () => {
-    // Временные данные для демонстрации
     const equipment: Equipment[] = [
         {
-            name: 'Сварочный аппарат MIG-250',
-            description: 'Профессиональный сварочный аппарат для полуавтоматической сварки',
+            name: 'Сварочный аппарат «Кентавр»',
+            description: 'Профессиональный сварочный аппарат для для выполнения различного рода бытовых и мелких производственных задач по сварке металла',
             photo: '/src/assets/Мастерские/Сварка/верстак.jpg'
         },
         {
-            name: 'Аппарат плазменной резки CUT-40',
-            description: 'Аппарат для точной плазменной резки металла',
+            name: 'Сварочный инвертор Ресанта',
+            description: 'Аппарат для сварки металлических конструкций',
             photo: '/src/assets/Мастерские/Сварка/верстак 2.jpg'
         },
-        
     ];
+
+    const additionalEquipment = {
+        post1: [
+            { name: 'Рабочее место мастера производственного обучения', quantity: 1 },
+            { name: 'Сварочный многопостовой выпрямитель ВДМ', quantity: 1 },
+            { name: 'Столы сварщика (сварочные посты)', quantity: 8, unit: 'постов' },
+            { name: 'Вытяжная и приточная вентиляция', quantity: 1 },
+            { name: 'Экраны защитные (шторы брезентовые огнеупорные)', quantity: 8 },
+            { name: 'Сварочные инверторы для сварки', quantity: 2 },
+            { name: 'Сварочный аппарат «Кентавр»', quantity: 1 },
+            { name: 'Сварочный аппарат Practica', quantity: 1 },
+            { name: 'Сварочный инвертор Ресанта', quantity: 1 },
+            { name: 'Сварочные маски', quantity: 15 },
+            { name: 'Станок заточной', quantity: 1 },
+            { name: 'Столы слесарные с тисками', quantity: 10 }
+        ],
+        post2: [
+            { name: 'Сварочный углекислотный аппарат Электроприбор ПДГ', quantity: 1 },
+            { name: 'Столы сварщика (сварочный пост)', quantity: 1, unit: 'пост' },
+            { name: 'Баллоны углекислотные, редукторы баллонные', quantity: 1 },
+            { name: 'Экраны защитные (шторы брезентовые огнеупорные)', quantity: 8 },
+            { name: 'Сварочные маски', quantity: 2 }
+        ],
+        post3: [
+            { name: 'Рабочие столы сварщика с защитными экранами', quantity: 2 },
+            { name: 'Генераторы ацетиленовые', quantity: 2 },
+            { name: 'Баллоны кислородные, редукторы баллонные', quantity: 2, unit: 'компл' },
+            { name: 'Тележки для баллонов', quantity: 1 },
+            { name: 'Клапаны обратные', quantity: 3 },
+            { name: 'Горелки кислородно-пропановая и кислородно-ацетиленовая', quantity: 2, unit: 'компл' }
+        ],
+        ppe: [
+            { name: 'Спецодежда (костюм сварщика брезентовый и рукавицы)', quantity: 25 },
+            { name: 'Защитная обувь', quantity: 25, unit: 'пар' },
+            { name: 'Рукавицы (комбинированные с 2-ным налодонником)', quantity: 25, unit: 'пар' },
+            { name: 'Защитные очки', quantity: 12 },
+            { name: 'Кепка (берет суконный)', quantity: 25 },
+            { name: 'Каска', quantity: 3 },
+            { name: 'Аптечка', quantity: 1 },
+            { name: 'Защитные очки для шлифовки', quantity: 5 },
+            { name: 'Сварочная маска', quantity: 8 }
+        ],
+        tools: [
+            { name: 'Ручная шлифовальная машинка (болгарка) с защитным кожухом', quantity: 2 },
+            { name: 'Металлическая щетка для шлифовальной машинки', quantity: 1 },
+            { name: 'Молоток для отделения шлака', quantity: 15 },
+            { name: 'Зубило', quantity: 8 },
+            { name: 'Напильники', quantity: 10 },
+            { name: 'Металлические щетки', quantity: 5 },
+            { name: 'Молоток', quantity: 10 },
+            { name: 'Универсальный шаблон сварщика', quantity: 1 },
+            { name: 'Стальная линейка с метрической разметкой', quantity: 3 },
+            { name: 'Прямоугольник', quantity: 3 },
+            { name: 'Струбцины и приспособления для сборки под сварку', quantity: 1, unit: 'компл' }
+        ]
+    };
 
     const masters: Master[] = [
         {
@@ -37,7 +91,7 @@ const WeldingWorkshop: React.FC = () => {
         },
         {
             id: 2,
-            name: 'Аринин Александр николаевич',
+            name: 'Аринин Александр Николаевич',
             photo: '/src/assets/Мастерские/Сварка/Аринин.png'
         },
     ];
@@ -53,6 +107,7 @@ const WeldingWorkshop: React.FC = () => {
 
     const [currentMasterIndex, setCurrentMasterIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
+    const [showMoreEquipment, setShowMoreEquipment] = useState(false);
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -88,7 +143,7 @@ const WeldingWorkshop: React.FC = () => {
                         О нашем техникуме
                     </h2>
                     <p className="text-gray-300 mb-4 text-lg">
-                        Гуковсикй строительный техникум (ГСТ) - это современное образовательное учреждение,
+                        Гуковский строительный техникум (ГСТ) - это современное образовательное учреждение,
                         где студенты получают качественное профессиональное образование в области строительства
                         и смежных специальностей.
                     </p>
@@ -98,7 +153,6 @@ const WeldingWorkshop: React.FC = () => {
                     </p>
                 </div>
 
-                {/* Секция с оборудованием */}
                 <div className="mb-16 bg-gray-800 rounded-xl p-8">
                     <h2 className="text-3xl font-bold text-primary mb-8">Наше оборудование</h2>
                     <div className="grid md:grid-cols-2 gap-8">
@@ -126,9 +180,60 @@ const WeldingWorkshop: React.FC = () => {
                             ))}
                         </div>
                     </div>
+                    <div className="mt-8">
+                        <button
+                            onClick={() => setShowMoreEquipment(!showMoreEquipment)}
+                            className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors"
+                        >
+                            {showMoreEquipment ? 'Скрыть' : 'Показать еще'}
+                        </button>
+                        {showMoreEquipment && (
+                            <div className="mt-6 space-y-6">
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Пост №1: Ручная дуговая сварка плавящимся электродом</h3>
+                                    <ul className="text-gray-300 list-disc pl-5">
+                                        {additionalEquipment.post1.map((item, index) => (
+                                            <li key={index}>{item.name} ({item.quantity} {item.unit || 'шт'})</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Пост №2: Полуавтоматическая и ручная дуговая сварка</h3>
+                                    <ul className="text-gray-300 list-disc pl-5">
+                                        {additionalEquipment.post2.map((item, index) => (
+                                            <li key={index}>{item.name} ({item.quantity} {item.unit || 'шт'})</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Пост №3: Газовая сварка и резка</h3>
+                                    <ul className="text-gray-300 list-disc pl-5">
+                                        {additionalEquipment.post3.map((item, index) => (
+                                            <li key={index}>{item.name} ({item.quantity} {item.unit || 'шт'})</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Средства индивидуальной защиты</h3>
+                                    <ul className="text-gray-300 list-disc pl-5">
+                                        {additionalEquipment.ppe.map((item, index) => (
+                                            <li key={index}>{item.name} ({item.quantity} {item.unit || 'шт'})</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                <div>
+                                    <h3 className="text-xl font-semibold text-white mb-4">Инструменты и приспособления</h3>
+                                    <ul className="text-gray-300 list-disc pl-5">
+                                        {additionalEquipment.tools.map((item, index) => (
+                                            <li key={index}>{item.name} ({item.quantity} {item.unit || 'шт'})</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
-                {/* Слайдер с мастерами */}
                 <div className="mb-16 bg-gray-800 rounded-xl p-8">
                     <h2 className="text-3xl font-bold text-primary mb-8">Наши мастера</h2>
                     <div className="relative">
@@ -161,7 +266,6 @@ const WeldingWorkshop: React.FC = () => {
                     </div>
                 </div>
 
-                {/* Галерея примеров работ */}
                 <div className="bg-gray-800 rounded-xl p-8">
                     <h2 className="text-3xl font-bold text-primary mb-8">Примеры наших работ</h2>
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

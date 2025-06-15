@@ -29,7 +29,7 @@ export default function AdminOrders() {
   const fetchOrders = async () => {
     try {
       const token = localStorage.getItem('access_token')
-      let url = 'http://localhost:8000/api/v1/orders/all'
+      let url = 'https://backend-api-production-4c70.up.railway.app/api/v1/orders/all'
       if (searchQuery) {
         url += `?${searchField}=${encodeURIComponent(searchQuery)}`
       }
@@ -60,7 +60,7 @@ export default function AdminOrders() {
   const handleStatusChange = async (orderId: number, newStatus: string) => {
     try {
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`http://localhost:8000/api/v1/orders/${orderId}/status?status=${newStatus}`, {
+      const response = await fetch(`https://backend-api-production-4c70.up.railway.app/api/v1/orders/${orderId}/status?status=${newStatus}`, {
         method: 'PUT',
         headers: {
           'Authorization': `Bearer ${token}`,

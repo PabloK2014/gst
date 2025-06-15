@@ -21,15 +21,16 @@ Base.metadata.create_all(bind=engine)
 origins = [
     "http://localhost:5173",
     "http://localhost:3000",
-    "http://localhost:8000",
+    "https://gst-worckshop.ru",
+    "https://www.gst-worckshop.ru",
 ]
 
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,
     allow_credentials=True,
-    allow_methods=["*"],
-    allow_headers=["*"],
+    allow_methods=["*"], 
+    allow_headers=["*"], 
 )
 
 @app.exception_handler(Exception)
