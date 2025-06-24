@@ -3,12 +3,14 @@ from sqlalchemy.orm import Session
 import datetime
 from jose import jwt
 from models import User
+from config import AVATARS_DIR as UPLOAD_DIR
 from database import get_session
 from schemas import UserCreate, UserLogin, UserProfile
 from pathlib import Path
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from typing import Optional, List
 from passlib.context import CryptContext
+
 
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
@@ -18,12 +20,11 @@ router = APIRouter(tags=["users"])
 
 SECRET_KEY = "gst200"
 ALGORITHM = "HS256"
-EXPIRE_MINUTES = 60 * 24 * 7  # Set token expiration to 7 days
+EXPIRE_MINUTES = 60 * 24 * 7 
 
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/users/login")
-UPLOAD_DIR = Path("static/avatars")
-UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+
 
 
 
@@ -90,12 +91,6 @@ async def update_user_me(
             "role": current_user.role,
             "created_at": current_user.created_at
         },
-        "access_token": access_token,
-        "token_type": "bearer"
-    }
-    
-    return {
-        "user": UserProfile.from_orm(current_user),
         "access_token": access_token,
         "token_type": "bearer"
     }

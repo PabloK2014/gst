@@ -7,20 +7,20 @@ from sqlalchemy import engine_from_config
 from sqlalchemy import pool
 from alembic import context
 
-# Добавляем путь к корню проекта, чтобы импортировать модели
+
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 
-# Импортируем объект Base и модели
-from models import Base
-  # Поменяй 'back.models' на путь к твоему файлу с моделями
 
-# Этот объект содержит метаданные для автогенерации миграций
+from models import Base
+  
+
+
 target_metadata = Base.metadata
 
-# Загружаем конфигурацию alembic.ini
+
 config = context.config
 
-# Настраиваем логирование из alembic.ini
+
 fileConfig(config.config_file_name)
 
 def run_migrations_offline():

@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa';
+import React, { useState } from 'react';
+import { FaTimes } from 'react-icons/fa';
 
 interface Master {
     id: number;
@@ -17,13 +17,13 @@ const WeldingWorkshop: React.FC = () => {
     const equipment: Equipment[] = [
         {
             name: 'Сварочный аппарат «Кентавр»',
-            description: 'Профессиональный сварочный аппарат для для выполнения различного рода бытовых и мелких производственных задач по сварке металла',
-            photo: '/src/assets/Мастерские/Сварка/верстак.jpg'
+            description: 'Профессиональный сварочный аппарат для выполнения различного рода бытовых и мелких производственных задач по сварке металла',
+            photo: '/assets/Мастерские/Сварка/верстак.jpg'
         },
         {
             name: 'Сварочный инвертор Ресанта',
             description: 'Аппарат для сварки металлических конструкций',
-            photo: '/src/assets/Мастерские/Сварка/верстак 2.jpg'
+            photo: '/assets/Мастерские/Сварка/верстак3.JPG'
         },
     ];
 
@@ -87,43 +87,26 @@ const WeldingWorkshop: React.FC = () => {
         {
             id: 1,
             name: 'Малюгин Вадим Григорьевич',
-            photo: '/src/assets/Мастерские/Сварка/Малюгин.jpg'
+            photo: '/assets/Мастерские/Сварка/Малюгин.jpg'
         },
         {
             id: 2,
             name: 'Аринин Александр Николаевич',
-            photo: '/src/assets/Мастерские/Сварка/Аринин.png'
+            photo: '/assets/Мастерские/Сварка/Аринин.png'
         },
     ];
 
     const workExamples = [
-        '/src/assets/Мастерские/Сварка/пример зонтик.jpg',
-        '/src/assets/Мастерские/Сварка/пример1.jpg',
-        '/src/assets/Мастерские/Сварка/пример2.jpg',
-        '/src/assets/Мастерские/Сварка/пример3.jpg',
-        '/src/assets/Мастерские/Сварка/пример4.jpg',
-        '/src/assets/Мастерские/Сварка/пример5.jpg',
+        '/assets/Мастерские/Сварка/пример зонтик.jpg',
+        '/assets/Мастерские/Сварка/пример1.jpg',
+        '/assets/Мастерские/Сварка/пример2.jpg',
+        '/assets/Мастерские/Сварка/пример3.jpg',
+        '/assets/Мастерские/Сварка/пример4.jpg',
+        '/assets/Мастерские/Сварка/пример5.jpg',
     ];
 
-    const [currentMasterIndex, setCurrentMasterIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [showMoreEquipment, setShowMoreEquipment] = useState(false);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            nextMaster();
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    const nextMaster = () => {
-        setCurrentMasterIndex((prev) => (prev + 1) % masters.length);
-    };
-
-    const prevMaster = () => {
-        setCurrentMasterIndex((prev) => (prev - 1 + masters.length) % masters.length);
-    };
 
     const openModal = (image: string) => {
         setSelectedImage(image);
@@ -136,16 +119,11 @@ const WeldingWorkshop: React.FC = () => {
                     Сварочная мастерская
                 </h1>
                 <div className="bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
-                    <h1 className="text-4xl font-bold text-primary mb-6">
-                        Добро пожаловать в ГСТ
-                    </h1>
                     <h2 className="text-2xl font-semibold mb-6 text-white">
-                        О нашем техникуме
+                        Мастерская сварочных работ
                     </h2>
                     <p className="text-gray-300 mb-4 text-lg">
-                        Гуковский строительный техникум (ГСТ) - это современное образовательное учреждение,
-                        где студенты получают качественное профессиональное образование в области строительства
-                        и смежных специальностей.
+                        Здесь студенты осваивают передовые технологии сварки под руководством опытных мастеров, используя современное оборудование. Наша мастерская — это место, где формируются профессиональные навыки, востребованные в строительной и промышленной отраслях.
                     </p>
                     <p className="text-gray-300 text-lg">
                         Наши мастерские оснащены современным оборудованием и предоставляют широкий спектр
@@ -172,7 +150,7 @@ const WeldingWorkshop: React.FC = () => {
                                         alt={`Оборудование: ${item.name}`}
                                         className="absolute inset-0 w-full h-full object-cover"
                                         onError={(e) => {
-                                            e.currentTarget.src = '/src/assets/placeholder.jpg';
+                                            e.currentTarget.src = '/assets/placeholder.jpg';
                                             console.error(`Ошибка загрузки изображения: ${item.photo}`);
                                         }}
                                     />
@@ -236,33 +214,19 @@ const WeldingWorkshop: React.FC = () => {
 
                 <div className="mb-16 bg-gray-800 rounded-xl p-8">
                     <h2 className="text-3xl font-bold text-primary mb-8">Наши мастера</h2>
-                    <div className="relative">
-                        <div className="flex justify-center items-center">
-                            <button
-                                onClick={prevMaster}
-                                className="absolute left-0 z-10 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
-                            >
-                                <FaChevronLeft size={24} />
-                            </button>
-                            <div className="text-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {masters.map((master) => (
+                            <div key={master.id} className="text-center">
                                 <div className="w-48 h-48 mx-auto mb-4 relative rounded-full overflow-hidden">
                                     <img
-                                        src={masters[currentMasterIndex].photo}
-                                        alt={masters[currentMasterIndex].name}
+                                        src={master.photo}
+                                        alt={master.name}
                                         className="absolute inset-0 w-full h-full object-cover"
                                     />
                                 </div>
-                                <h3 className="text-xl font-semibold text-white">
-                                    {masters[currentMasterIndex].name}
-                                </h3>
+                                <h3 className="text-xl font-semibold text-white">{master.name}</h3>
                             </div>
-                            <button
-                                onClick={nextMaster}
-                                className="absolute right-0 z-10 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
-                            >
-                                <FaChevronRight size={24} />
-                            </button>
-                        </div>
+                        ))}
                     </div>
                 </div>
 
@@ -280,7 +244,7 @@ const WeldingWorkshop: React.FC = () => {
                                     alt={`Пример сварочной работы ${index + 1}`}
                                     className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                     onError={(e) => {
-                                        e.currentTarget.src = '/src/assets/placeholder.jpg';
+                                        e.currentTarget.src = '/assets/placeholder.jpg';
                                         console.error(`Ошибка загрузки изображения: ${photo}`);
                                     }}
                                 />

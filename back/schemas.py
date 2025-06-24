@@ -2,7 +2,6 @@ from pydantic import BaseModel, EmailStr
 from typing import Optional
 from datetime import datetime
 
-
 # ----------- User Schemas -----------
 
 class UserProfile(BaseModel):
@@ -17,7 +16,6 @@ class UserProfile(BaseModel):
     class Config:
         from_attributes = True
 
-
 class UserCreate(BaseModel):
     email: EmailStr
     password: str
@@ -28,11 +26,9 @@ class UserCreate(BaseModel):
     class Config:
         from_attributes = True
 
-
 class UserLogin(BaseModel):
     email: EmailStr
     password: str
-
 
 # ----------- Product Schemas -----------
 
@@ -41,11 +37,9 @@ class ProductBase(BaseModel):
     description: str
     price: float
     category_id: Optional[int] = None
-
-
+    custom_price_text: Optional[str] = None  
 class ProductCreate(ProductBase):
     pass
-
 
 class Product(ProductBase):
     id: int
@@ -55,16 +49,15 @@ class Product(ProductBase):
     class Config:
         from_attributes = True
 
-
 class ProductShort(BaseModel):
     name: str
     description: str
     image: Optional[str]
     price: float
+    custom_price_text: Optional[str] = None 
 
     class Config:
         from_attributes = True
-
 
 # ----------- Category Schemas -----------
 
@@ -72,17 +65,14 @@ class CategoryBase(BaseModel):
     name: str
     description: str
 
-
 class CategoryCreate(CategoryBase):
     pass
-
 
 class Category(CategoryBase):
     id: int
 
     class Config:
         from_attributes = True
-
 
 # ----------- Order Schemas -----------
 
@@ -92,17 +82,15 @@ class OrderBase(BaseModel):
     total_amount: float
     comment: Optional[str] = None
 
-
 class OrderCreate(OrderBase):
     pass
-
 
 class OrderResponse(OrderBase):
     id: int
     status: str
     created_at: datetime
-    product: ProductShort
-    user: Optional[UserProfile]
+    product: Optional[ProductShort] = None
+    user: Optional[UserProfile] = None
 
     class Config:
         from_attributes = True

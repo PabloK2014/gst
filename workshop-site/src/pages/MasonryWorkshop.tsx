@@ -18,7 +18,7 @@ const MasonryWorkshop: React.FC = () => {
         {
             name: 'Камнерезный станок DIAM SK 800/2.2',
             description: 'Профессиональная бетономешалка для приготовления строительных растворов',
-            photo: '/assets/Мастерские/Камень/stanok.jpg'
+            photo: '/assets/Мастерские/Камень/СтолярПила.JPG'
         },
         {
             name: 'Камнерезный станок',
@@ -76,16 +76,13 @@ const MasonryWorkshop: React.FC = () => {
             name: 'Лесников Игорь Юрьевич',
             photo: '/assets/Мастерские/Камень/Лесников.jpg'
         },
-        {
-            id: 2,
-            name: 'Сидоров Михаил Петрович',
-            photo: '/assets/Мастерские/Каменные/master2.jpg'
-        },
+
     ];
 
     const workExamples = [
         '/assets/Мастерские/Камень/пример1.jpg',
         '/assets/Мастерские/Камень/фото.jpg',
+        '/assets/Мастерские/Камень/КаменьПример2.JPG',
     ];
 
     const [currentMasterIndex, setCurrentMasterIndex] = useState(0);
@@ -119,16 +116,11 @@ const MasonryWorkshop: React.FC = () => {
                     Мастерская каменных работ
                 </h1>
                 <div className="bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
-                    <h1 className="text-4xl font-bold text-primary mb-6">
-                        Добро пожаловать в ГСТ
-                    </h1>
                     <h2 className="text-2xl font-semibold mb-6 text-white">
-                        О нашем техникуме
+                    Мастерская каменных работ 
                     </h2>
                     <p className="text-gray-300 mb-4 text-lg">
-                        Гуковский строительный техникум (ГСТ) - это современное образовательное учреждение,
-                        где студенты получают качественное профессиональное образование в области строительства
-                        и смежных специальностей.
+                    Мастерская каменных работ  приглашает вас погрузиться в искусство возведения прочных и эстетичных конструкций! Под руководством квалифицированных мастеров студенты обучаются работе с кирпичом, бетоном и другими материалами, используя современные инструменты и технологии.
                     </p>
                     <p className="text-gray-300 text-lg">
                         Наши мастерские оснащены современным оборудованием и предоставляют широкий спектр
@@ -155,7 +147,7 @@ const MasonryWorkshop: React.FC = () => {
                                         alt={`Оборудование: ${item.name}`}
                                         className="absolute inset-0 w-full h-full object-cover"
                                         onError={(e) => {
-                                            e.currentTarget.src = '/src/assets/placeholder.jpg';
+                                            e.currentTarget.src = '/assets/placeholder.jpg';
                                             console.error(`Ошибка загрузки изображения: ${item.photo}`);
                                         }}
                                     />
@@ -246,7 +238,7 @@ const MasonryWorkshop: React.FC = () => {
                                     alt={`Пример каменной работы ${index + 1}`}
                                     className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                     onError={(e) => {
-                                        e.currentTarget.src = '/src/assets/placeholder.jpg';
+                                        e.currentTarget.src = '/assets/placeholder.jpg';
                                         console.error(`Ошибка загрузки изображения: ${photo}`);
                                     }}
                                 />

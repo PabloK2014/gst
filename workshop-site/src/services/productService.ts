@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const API_URL = 'https://backend-api-production-4c70.up.railway.app/api';
+const API_URL = 'http://185.178.47.86:8000/api';
 
 export interface Product {
   id: number;
@@ -9,6 +9,7 @@ export interface Product {
   price: number;
   category_id: number;
   image?: string;
+  custom_price_text?: string | null;
 }
 
 export interface ProductCreate {
@@ -16,6 +17,7 @@ export interface ProductCreate {
   description: string;
   price: number;
   category_id: number;
+  custom_price_text?: string | null;
 }
 
 export const productService = {
@@ -25,9 +27,14 @@ export const productService = {
     formData.append('description', product.description);
     formData.append('price', product.price.toString());
     formData.append('category_id', product.category_id.toString());
+    if (product.custom_price_text !== undefined) {
+      formData.append('custom_price_text', product.custom_price_text || '');
+    }
     if (image) {
       formData.append('image', image);
     }
+
+    console.log('Create Product FormData:', Object.fromEntries(formData)); // Отладка
 
     const response = await axios.post(`${API_URL}/products`, formData, {
       headers: {
@@ -39,6 +46,7 @@ export const productService = {
 
   async getProducts() {
     const response = await axios.get(`${API_URL}/products`);
+    console.log('Get Products Response:', response.data); // Отладка
     return response.data;
   },
 
@@ -48,9 +56,14 @@ export const productService = {
     formData.append('description', product.description);
     formData.append('price', product.price.toString());
     formData.append('category_id', product.category_id.toString());
+    if (product.custom_price_text !== undefined) {
+      formData.append('custom_price_text', product.custom_price_text || '');
+    }
     if (image) {
       formData.append('image', image);
     }
+
+    console.log('Update Product FormData:', Object.fromEntries(formData)); // Отладка
 
     const response = await axios.put(`${API_URL}/products/${id}`, formData, {
       headers: {

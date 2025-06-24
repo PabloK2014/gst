@@ -16,7 +16,7 @@ export default function OrderIcon() {
     const fetchOrdersCount = async () => {
       try {
         const currentUser = await userService.getCurrentUser()
-        const response = await fetch(`https://backend-api-production-4c70.up.railway.app/api/v1/orders/user/${currentUser.id}`)
+        const response = await fetch(`http://185.178.47.86:8000/api/v1/orders/user/${currentUser.id}`)
         const orders: Order[] = await response.json()
         setOrdersCount(orders.length)
       } catch (error) {

@@ -16,7 +16,7 @@ export default function OrderDetails({ orderId, onClose, onDelete }: OrderDetail
     const fetchOrderDetails = async () => {
       try {
         const token = localStorage.getItem('access_token')
-        const response = await fetch(`https://backend-api-production-4c70.up.railway.app/api/v1/orders/${orderId}`, {
+        const response = await fetch(`http://185.178.47.86:8000/api/v1/orders/${orderId}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -45,7 +45,7 @@ export default function OrderDetails({ orderId, onClose, onDelete }: OrderDetail
     try {
       setDeleting(true)
       const token = localStorage.getItem('access_token')
-      const response = await fetch(`https://backend-api-production-4c70.up.railway.app/api/v1/orders/${orderId}/delete`, {
+      const response = await fetch(`http://185.178.47.86:8000/api/v1/orders/${orderId}/delete`, {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -95,7 +95,7 @@ export default function OrderDetails({ orderId, onClose, onDelete }: OrderDetail
         <div className="space-y-4">
           <div className="aspect-w-16 aspect-h-9">
             <img
-              src={order.product.image}
+              src={`http://185.178.47.86:8000${order.product.image}?t=${Date.now()}`}
               alt={order.product.name}
               className="w-full h-48 object-cover rounded-lg"
             />

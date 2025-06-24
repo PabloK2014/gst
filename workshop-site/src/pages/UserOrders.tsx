@@ -31,7 +31,7 @@ export default function UserOrders() {
       try {
         const currentUser = await userService.getCurrentUser();
         const token = localStorage.getItem('access_token');
-        const response = await fetch(`https://backend-api-production-4c70.up.railway.app/api/v1/orders/user/${currentUser.id}`, {
+        const response = await fetch(`http://185.178.47.86:8000/api/v1/orders/user/${currentUser.id}`, {
           headers: {
             'Authorization': `Bearer ${token}`,
             'Content-Type': 'application/json'
@@ -107,7 +107,7 @@ export default function UserOrders() {
                 <div className="flex items-center space-x-4">
                   <div className="w-16 h-16">
                     <img
-                      src={order.product.image}
+                      src={`http://185.178.47.86:8000${order.product.image}?t=${Date.now()}`}
                       alt={order.product.name}
                       className="w-full h-full object-cover rounded"
                     />

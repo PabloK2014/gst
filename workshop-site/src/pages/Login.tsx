@@ -21,7 +21,7 @@ const Login = () => {
         };
         console.log("Отправка данных:", userData);
         try {
-            const response = await fetch('https://backend-api-production-4c70.up.railway.app/users/login', {
+            const response = await fetch('http://185.178.47.86:8000/users/login', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

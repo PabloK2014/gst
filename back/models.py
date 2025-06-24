@@ -1,4 +1,4 @@
-from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey, Enum, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, Float, ForeignKey, Enum, Boolean, Text
 from sqlalchemy.orm import declarative_base, relationship
 from datetime import datetime
 import enum
@@ -42,6 +42,7 @@ class Product(Base):
     image = Column(String, nullable=True)
     category_id = Column(Integer, ForeignKey("categories.id"))
     created_at = Column(DateTime, default=datetime.utcnow)
+    custom_price_text = Column(Text, nullable=True)
     
     category = relationship("CategoryDB", back_populates="products")
 

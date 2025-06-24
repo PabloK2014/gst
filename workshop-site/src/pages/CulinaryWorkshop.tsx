@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa';
+import React, { useState} from 'react';
+import {FaTimes } from 'react-icons/fa';
 
 interface Master {
     id: number;
@@ -16,19 +16,19 @@ interface Equipment {
 const CulinaryWorkshop: React.FC = () => {
     const equipment: Equipment[] = [
         {
-            name: 'Профессиональная плита',
-            description: 'Промышленная плита с 6 конфорками и двумя духовыми шкафами',
-            photo: '/src/assets/Мастерские/Поварское дело/плита.jpg'
+            name: 'Пароконвектомат Radax CC06MO',
+            description: 'Пароконвектомат Radax CHEKHOV CC06M0 предназначен для приготовления различных блюд, выпечки хлебобулочных и кондитерских изделий на предприятиях общественного питания и торговли. Модель оснащена подсветкой, механическим управлением и дверцей с левым открыванием.',
+            photo: '/assets//Мастерские/Повар/CC06M0.jpg'
         },
         {
-            name: 'Холодильное оборудование',
-            description: 'Промышленный холодильник для хранения продуктов',
-            photo: '/src/assets/Мастерские/Поварское дело/холодильник.jpg'
+            name: 'Фритюрница HURAKAN HKN FR6L',
+            description: 'Фритюрница Hurakan HKN-FR6L предназначена для приготовления широкого спектра блюд в большом объеме масла или жира на предприятиях общественного питания и торговли. Модель оснащена электромеханической системой управления, регулировкой температуры и холодной зоной. Корпус выполнен из нержавеющей стали.',
+            photo: '/assets//Мастерские/Повар/hurakan.jpg'
         },
         {
-            name: 'Кухонный комбайн',
-            description: 'Профессиональный кухонный комбайн для обработки продуктов',
-            photo: '/src/assets/Мастерские/Поварское дело/комбайн.jpg'
+            name: 'Машина для вакуумной упаковки Caso VacuChef 40',
+            description: 'Однокамерный вакуумный упаковщик CASO VacuChef 40 используется на предприятиях пищевой промышленности, общественного питания и торговли для упаковки в вакуум полуфабрикатов и готовых блюд в пакетах или контейнерах для увеличения срока хранения. Модель оснащена сенсорной панелью управления, крышкой из закаленного стекла и зажимами для пакетов внутри камеры. Корпус выполнен из нержавеющей стали.',
+            photo: '/assets//Мастерские/Повар/caso.jpg'
         },
     ];
 
@@ -127,43 +127,27 @@ const CulinaryWorkshop: React.FC = () => {
         {
             id: 1,
             name: 'Хорольская Олеся Валерьевна',
-            photo: '/src/assets/Мастерские/Повар/Хорольская.jpg'
+            photo: '/assets/Мастерские/Повар/Хорольская.jpg'
         },
         {
             id: 2,
-            name: 'Гусина Любовь Владимировна',
-            photo: '/src/assets/Мастерские/Поварское дело/мастер2.jpg'
+            name: 'Гусева Любовь Владимировна',
+            photo: '/assets//Мастерские/Повар/gusina.jpg'
         },
     ];
 
     const workExamples = [
-        '/src/assets/Мастерские/Повар/пример1.jpg',
-        '/src/assets/Мастерские/Повар/пример2.jpg',
-        '/src/assets/Мастерские/Повар/пример3.jpg',
-        '/src/assets/Мастерские/Повар/пример4.jpg',
-        '/src/assets/Мастерские/Повар/primer5.jpg',
-        '/src/assets/Мастерские/Повар/primer6.jpg',
+        '/assets/Мастерские/Повар/пример1.jpg',
+        '/assets/Мастерские/Повар/pelmen.jpg',
+        '/assets/Мастерские/Повар/пример3.jpg',
+        '/assets/Мастерские/Повар/пример4.jpg',
+        '/assets/Мастерские/Повар/tort.jpg',
+        '/assets/Мастерские/Повар/primer6.jpg',
     ];
 
-    const [currentMasterIndex, setCurrentMasterIndex] = useState(0);
+
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [showMoreEquipment, setShowMoreEquipment] = useState(false);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            nextMaster();
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    const nextMaster = () => {
-        setCurrentMasterIndex((prev) => (prev + 1) % masters.length);
-    };
-
-    const prevMaster = () => {
-        setCurrentMasterIndex((prev) => (prev - 1 + masters.length) % masters.length);
-    };
 
     const openModal = (image: string) => {
         setSelectedImage(image);
@@ -180,14 +164,11 @@ const CulinaryWorkshop: React.FC = () => {
                     Кулинарная мастерская
                 </h1>
                 <div className="bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
-                    <h1 className="text-4xl font-bold text-primary mb-6">
-                        Добро пожаловать в ГСТ
-                    </h1>
                     <h2 className="text-2xl font-semibold mb-6 text-white">
-                        О нашей кулинарной мастерской
+                        О нашей учебной кухне ресторана
                     </h2>
                     <p className="text-gray-300 mb-4 text-lg">
-                        В нашей кулинарной мастерской студенты обучаются искусству приготовления пищи
+                        В нашей учебной кухне студенты обучаются искусству приготовления пищи
                         под руководством опытных мастеров. Мы используем современное профессиональное
                         оборудование и качественные ингредиенты.
                     </p>
@@ -216,7 +197,7 @@ const CulinaryWorkshop: React.FC = () => {
                                         alt={`Оборудование: ${item.name}`}
                                         className="absolute inset-0 w-full h-full object-cover"
                                         onError={(e) => {
-                                            e.currentTarget.src = '/src/assets/placeholder.jpg';
+                                            e.currentTarget.src = '/assets/placeholder.jpg';
                                             console.error(`Ошибка загрузки изображения: ${item.photo}`);
                                         }}
                                     />
@@ -256,33 +237,19 @@ const CulinaryWorkshop: React.FC = () => {
 
                 <div className="mb-16 bg-gray-800 rounded-xl p-8">
                     <h2 className="text-3xl font-bold text-primary mb-8">Наши мастера</h2>
-                    <div className="relative">
-                        <div className="flex justify-center items-center">
-                            <button
-                                onClick={prevMaster}
-                                className="absolute left-0 z-10 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
-                            >
-                                <FaChevronLeft size={24} />
-                            </button>
-                            <div className="text-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {masters.map((master) => (
+                            <div key={master.id} className="text-center">
                                 <div className="w-48 h-48 mx-auto mb-4 relative rounded-full overflow-hidden">
                                     <img
-                                        src={masters[currentMasterIndex].photo}
-                                        alt={masters[currentMasterIndex].name}
+                                        src={master.photo}
+                                        alt={master.name}
                                         className="absolute inset-0 w-full h-full object-cover"
                                     />
                                 </div>
-                                <h3 className="text-xl font-semibold text-white">
-                                    {masters[currentMasterIndex].name}
-                                </h3>
+                                <h3 className="text-xl font-semibold text-white">{master.name}</h3>
                             </div>
-                            <button
-                                onClick={nextMaster}
-                                className="absolute right-0 z-10 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
-                            >
-                                <FaChevronRight size={24} />
-                            </button>
-                        </div>
+                        ))}
                     </div>
                 </div>
 
@@ -300,7 +267,7 @@ const CulinaryWorkshop: React.FC = () => {
                                     alt={`Пример кулинарной работы ${index + 1}`}
                                     className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                     onError={(e) => {
-                                        e.currentTarget.src = '/src/assets/placeholder.jpg';
+                                        e.currentTarget.src = '/assets/placeholder.jpg';
                                     }}
                                 />
                             </div>

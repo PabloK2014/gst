@@ -26,7 +26,7 @@ const Header = () => {
       <div className="container mx-auto px-6 py-4">
         <div className="flex justify-between items-center">
           <Link to="/" className="text-2xl font-bold text-white">
-            ГСТ
+            Главная
           </Link>
           <div className="flex items-center space-x-4">
             <Link

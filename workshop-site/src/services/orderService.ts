@@ -1,55 +1,62 @@
-import axios from 'axios'
-import { Order } from '../types/order'
+import axios from 'axios';
+import { Order } from '../types/order';
 
-const API_URL = 'https://backend-api-production-4c70.up.railway.app/api/v1'
+const API_BASE_URL =  'http://185.178.47.86:8000/api/v1';
+
+const api = axios.create({
+  baseURL: API_BASE_URL,
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+
+api.interceptors.request.use((config) => {
+  const token = localStorage.getItem('access_token');
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  } else {
+    console.warn('Токен авторизации отсутствует');
+  }
+  return config;
+});
 
 export const orderService = {
   async getOrders(): Promise<Order[]> {
     try {
-      const response = await axios.get(`${API_URL}/orders`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        },
-      })
-      return response.data
+      const response = await api.get('/orders');
+      return response.data;
     } catch (error) {
-      console.error('Error fetching orders:', error)
-      throw error
+      console.error('Ошибка загрузки заказов:', error);
+      throw error;
     }
   },
 
   async createOrder(orderData: {
-    user_id: number
-    product_id: number
-    total_amount: number
-    comment?: string
-    phone: string
-    name: string
+    user_id: number;
+    product_id: number;
+    total_amount: number;
+    comment?: string;
+    phone: string;
+    name: string;
   }): Promise<Order> {
     try {
-      const response = await axios.post(`${API_URL}/orders`, orderData, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        },
-      })
-      return response.data
-    } catch (error) {
-      console.error('Error creating order:', error)
-      throw error
+      console.log('Отправка заказа:', orderData);
+      const response = await api.post('/orders', orderData);
+      console.log('Заказ создан:', response.data);
+      return response.data;
+    } catch (error: any) {
+      console.error('Ошибка создания заказа:', error.response?.data || error.message);
+      throw error;
     }
   },
 
   async getOrderById(id: number): Promise<Order> {
     try {
-      const response = await axios.get(`${API_URL}/orders/${id}`, {
-        headers: {
-          Authorization: `Bearer ${localStorage.getItem('access_token')}`,
-        },
-      })
-      return response.data
+      const response = await api.get(`/orders/${id}`);
+      return response.data;
     } catch (error) {
-      console.error('Error fetching order:', error)
-      throw error
+      console.error('Ошибка загрузки заказа:', error);
+      throw error;
     }
   },
-}
+};

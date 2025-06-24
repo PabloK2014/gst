@@ -27,7 +27,7 @@ const Profile = () => {
   useEffect(() => {
     const fetchUserData = async () => {
       try {
-        const response = await fetch('https://backend-api-production-4c70.up.railway.app/users/me', {
+        const response = await fetch('http://185.178.47.86:8000/users/me', {
           method: 'GET',
           headers: {
             'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
@@ -80,7 +80,7 @@ const Profile = () => {
       const formData = new FormData()
       formData.append('file', file)
 
-      const response = await fetch('https://backend-api-production-4c70.up.railway.app/users/upload-profile-picture', {
+      const response = await fetch('http://185.178.47.86:8000/users/upload-profile-picture', {
         method: 'POST',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
@@ -108,7 +108,7 @@ const Profile = () => {
   const handleSave = async () => {
     try {
       setSaveStatus(null)
-      const response = await fetch('https://backend-api-production-4c70.up.railway.app/users/me', {
+      const response = await fetch('http://185.178.47.86:8000/users/me', {
         method: 'PATCH',
         headers: {
           'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
@@ -140,7 +140,6 @@ const Profile = () => {
         avatar: userData.avatar || null
       }
       setUser(updatedUser)
-      // Обновляем токен в localStorage
       if (data.access_token) {
         localStorage.setItem('access_token', data.access_token)
       }
@@ -177,7 +176,7 @@ const Profile = () => {
                   >
                     {user.avatar ? (
                       <img
-                        src={`https://backend-api-production-4c70.up.railway.app${user.avatar}?t=${Date.now()}`}
+                        src={`http://185.178.47.86:8000${user.avatar}?t=${Date.now()}`}
                         alt="Аватар пользователя"
                         className="w-24 h-24 rounded-full object-cover"
                       />

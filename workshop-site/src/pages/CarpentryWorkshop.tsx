@@ -1,5 +1,5 @@
-import React, { useState, useEffect } from 'react';
-import { FaChevronLeft, FaChevronRight, FaTimes } from 'react-icons/fa';
+import React, { useState } from 'react';
+import {FaTimes } from 'react-icons/fa';
 
 interface Master {
     id: number;
@@ -16,19 +16,14 @@ interface Equipment {
 const CarpentryWorkshop: React.FC = () => {
     const equipment: Equipment[] = [
         {
-            name: 'Фрезерный станок',
-            description: 'Профессиональный фрезерный станок для обработки древесины',
-            photo: '/src/assets/Мастерские/Столярные/milling.jpg'
+            name: 'станок токарный с копиром JET',
+            description: 'верстак для обработки древесины',
+            photo: '/assets/Мастерские/Столяр/СтолярПила2.JPG'
         },
         {
             name: 'Токарный станок по дереву',
             description: 'Станок для точной токарной обработки древесины',
-            photo: '/src/assets/Мастерские/Столярные/lathe.jpg'
-        },
-        {
-            name: 'Ленточная пила',
-            description: 'Профессиональная ленточная пила для распила древесины',
-            photo: '/src/assets/Мастерские/Столярные/saw.jpg'
+            photo: '/assets/Мастерские/Столяр/столяробщ.JPG'
         },
     ];
 
@@ -84,7 +79,33 @@ const CarpentryWorkshop: React.FC = () => {
             { name: 'Пылесос', quantity: 1 },
             { name: 'Шуруповерт', quantity: 3 },
             { name: 'Фрезерная машина', quantity: 1 },
-            { name: 'Комплект эл. гравера', quantity: 1 }
+            { name: 'Комплект эл. гравера', quantity: 1 },
+            { name: 'Станок УРТ-410 фуговально-рейсмусовый', quantity: 1 },
+            { name: 'Станок рейсмусовый JE', quantity: 1 },
+            { name: 'Станок углозарезной DEWALT радиально-консольная пила', quantity: 1 },
+            { name: 'Станок токарный с копиром JET', quantity: 1 },
+            { name: 'Станок СЗЕП-600Т (для заточки пил)', quantity: 1 },
+            { name: 'Сушильная камера аэродинамическая 10м', quantity: 1 },
+            { name: 'Пылесос для сборки стружки JET DC-1100CK', quantity: 2 },
+            { name: 'Станок SС-30А форматно-раскроечный L 3000мм', quantity: 1 },
+            { name: 'Станок В-70 кромкооблицовочный', quantity: 1 },
+            { name: 'Установка компрессорная С54/С-100LВ 30А', quantity: 1 },
+            { name: 'Станок ШЛ П-ст плоскошлифовальный ленточный', quantity: 1 },
+            { name: 'Станок ФСШ-1А (К) фрезерный с шипорезной кареткой', quantity: 1 },
+            { name: 'Станок долбежный JET 719A', quantity: 1 },
+            { name: 'Станок BRAVO 5-250 комбинированный деревообрабатывающий', quantity: 1 },
+            { name: 'Станок настольно-сверлильный ЗК-631', quantity: 1 },
+            { name: 'Станок точильно-шлифовальный ЗК-631', quantity: 1 },
+            { name: 'Станок 4-х сторонний деревообрабатывающий', quantity: 1 },
+            { name: 'Станок деревообрабатывающий', quantity: 1 },
+            { name: 'Пылесос для стружки «Корвет»', quantity: 1 },
+            { name: 'Установка вентиляционная пылеулавливающая', quantity: 1 },
+            { name: 'Станок Ц6-2 (круглопильный)', quantity: 1 },
+            { name: 'Станок рейсмусовый односторонний СР6-9', quantity: 1 },
+            { name: 'Станок долбежный (модернизирован из комбинированного)', quantity: 1 },
+            { name: 'Станок настольно-сверлильный JET', quantity: 1 },
+            { name: 'Пресс гидравлический горячий 2-х пролетный', quantity: 1 },
+            { name: 'Вайма сборочная вертикальная', quantity: 1 }
         ],
         fixtures: [
             { name: 'Шкаф для хранения инструментов', quantity: 2 },
@@ -99,43 +120,27 @@ const CarpentryWorkshop: React.FC = () => {
         {
             id: 1,
             name: 'Сиденко Роман Владимирович',
-            photo: '/src/assets/Мастерские/Столярные/master1.jpg'
+            photo: '/assets/Мастерские/Столяр/sidenko.png'
         },
         {
             id: 2,
-            name: 'Зайцев Виталий Александрович',
-            photo: '/src/assets/Мастерские/Столярные/master2.jpg'
-        },
+            name: 'зайцев Виталий Александрович',
+            photo: '/assets/Мастерские/Столяр/zaicev.png'
+            
+        }
     ];
 
     const workExamples = [
-        '/src/assets/Мастерские/Столяр/пример4.jpg',
-        '/src/assets/Мастерские/Столяр/пример3.jpg',
-        '/src/assets/Мастерские/Столяр/стол.jpg',
-        '/src/assets/Мастерские/Столяр/стол2.jpg',
-        '/src/assets/Мастерские/Столяр/фото1.jpg',
-        '/src/assets/Мастерские/Столяр/фото2.jpg',
+        '/assets/Мастерские/Столяр/пример4.jpg',
+        '/assets/Мастерские/Столяр/пример3.jpg',
+        '/assets/Мастерские/Столяр/stol.jpg',
+        '/assets/Мастерские/Столяр/стол2.jpg',
+        '/assets/Мастерские/Столяр/фото1.jpg',
+        '/assets/Мастерские/Столяр/фото2.jpg',
     ];
 
-    const [currentMasterIndex, setCurrentMasterIndex] = useState(0);
     const [selectedImage, setSelectedImage] = useState<string | null>(null);
     const [showMoreEquipment, setShowMoreEquipment] = useState(false);
-
-    useEffect(() => {
-        const interval = setInterval(() => {
-            nextMaster();
-        }, 5000);
-
-        return () => clearInterval(interval);
-    }, []);
-
-    const nextMaster = () => {
-        setCurrentMasterIndex((prev) => (prev + 1) % masters.length);
-    };
-
-    const prevMaster = () => {
-        setCurrentMasterIndex((prev) => (prev - 1 + masters.length) % masters.length);
-    };
 
     const openModal = (image: string) => {
         setSelectedImage(image);
@@ -148,16 +153,11 @@ const CarpentryWorkshop: React.FC = () => {
                     Мастерская столярных работ
                 </h1>
                 <div className="bg-gray-800 rounded-lg shadow-lg p-8 mb-8">
-                    <h1 className="text-4xl font-bold text-primary mb-6">
-                        Добро пожаловать в ГСТ
-                    </h1>
                     <h2 className="text-2xl font-semibold mb-6 text-white">
-                        О нашем техникуме
+                        Мастерская столярных работ
                     </h2>
                     <p className="text-gray-300 mb-4 text-lg">
-                        Гуковский строительный техникум (ГСТ) - это современное образовательное учреждение,
-                        где студенты получают качественное профессиональное образование в области строительства
-                        и смежных специальностей.
+                        Добро пожаловать в мастерскую столярных работ! Здесь студенты раскрывают секреты работы с деревом, создавая функциональные и эстетичные изделия под руководством опытных мастеров. Наша мастерская сочетает традиции столярного дела с современными технологиями.
                     </p>
                     <p className="text-gray-300 text-lg">
                         Наши мастерские оснащены современным оборудованием и предоставляют широкий спектр
@@ -169,8 +169,8 @@ const CarpentryWorkshop: React.FC = () => {
                     <h2 className="text-3xl font-bold text-primary mb-8">Наше оборудование</h2>
                     <div className="grid md:grid-cols-2 gap-8">
                         <div className="space-y-6">
-                            {equipment.map((item, index) => (
-                                <div key={index} className="bg-gray-700 p-4 rounded-lg">
+                            {equipment.map((item) => (
+                                <div key={item.name} className="bg-gray-700 p-4 rounded-lg">
                                     <h3 className="text-xl font-semibold text-white mb-2">{item.name}</h3>
                                     <p className="text-gray-300">{item.description}</p>
                                 </div>
@@ -184,7 +184,7 @@ const CarpentryWorkshop: React.FC = () => {
                                         alt={`Оборудование: ${item.name}`}
                                         className="absolute inset-0 w-full h-full object-cover"
                                         onError={(e) => {
-                                            e.currentTarget.src = '/src/assets/placeholder.jpg';
+                                            e.currentTarget.src = '/placeholder.jpg';
                                             console.error(`Ошибка загрузки изображения: ${item.photo}`);
                                         }}
                                     />
@@ -195,7 +195,7 @@ const CarpentryWorkshop: React.FC = () => {
                     <div className="mt-8">
                         <button
                             onClick={() => setShowMoreEquipment(!showMoreEquipment)}
-                            className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-primary-dark transition-colors"
+                            className="bg-primary text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors"
                         >
                             {showMoreEquipment ? 'Скрыть' : 'Показать еще'}
                         </button>
@@ -277,33 +277,19 @@ const CarpentryWorkshop: React.FC = () => {
 
                 <div className="mb-16 bg-gray-800 rounded-xl p-8">
                     <h2 className="text-3xl font-bold text-primary mb-8">Наши мастера</h2>
-                    <div className="relative">
-                        <div className="flex justify-center items-center">
-                            <button
-                                onClick={prevMaster}
-                                className="absolute left-0 z-10 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
-                            >
-                                <FaChevronLeft size={24} />
-                            </button>
-                            <div className="text-center">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+                        {masters.map((master) => (
+                            <div key={master.id} className="text-center">
                                 <div className="w-48 h-48 mx-auto mb-4 relative rounded-full overflow-hidden">
                                     <img
-                                        src={masters[currentMasterIndex].photo}
-                                        alt={masters[currentMasterIndex].name}
+                                        src={master.photo}
+                                        alt={master.name}
                                         className="absolute inset-0 w-full h-full object-cover"
                                     />
                                 </div>
-                                <h3 className="text-xl font-semibold text-white">
-                                    {masters[currentMasterIndex].name}
-                                </h3>
+                                <h3 className="text-xl font-semibold text-white">{master.name}</h3>
                             </div>
-                            <button
-                                onClick={nextMaster}
-                                className="absolute right-0 z-10 bg-black bg-opacity-50 p-2 rounded-full text-white hover:bg-opacity-75"
-                            >
-                                <FaChevronRight size={24} />
-                            </button>
-                        </div>
+                        ))}
                     </div>
                 </div>
 
@@ -321,7 +307,7 @@ const CarpentryWorkshop: React.FC = () => {
                                     alt={`Пример столярной работы ${index + 1}`}
                                     className="absolute inset-0 w-full h-full object-cover hover:scale-105 transition-transform duration-300"
                                     onError={(e) => {
-                                        e.currentTarget.src = '/src/assets/placeholder.jpg';
+                                        e.currentTarget.src = '/placeholder.jpg';
                                         console.error(`Ошибка загрузки изображения: ${photo}`);
                                     }}
                                 />

@@ -1,27 +1,38 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
-import './Registration.css'; // Импорт стилей
+import './Registration.css'; 
 
 const Registration = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [isConsentChecked, setIsConsentChecked] = useState(false); 
 
     const handleLoginClick = () => {
         navigate('/login');
     };
 
+    const handleConsentChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setIsConsentChecked(e.target.checked); 
+    };
+
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+
+        if (!isConsentChecked) {
+            alert("Необходимо дать согласие на обработку персональных данных");
+            return;
+        }
+
         if (password !== confirmPassword) {
             alert("Пароли не совпадают");
             return;
         }
 
         try {
-            const response = await axios.post('http://127.0.0.1:8000/users/register', {
+            const response = await axios.post('http://185.178.47.86:8000/users/register', {
                 email,
                 password,
             });
@@ -68,6 +79,20 @@ const Registration = () => {
                     />
                 </div>
                 <button type="submit" className="submit-button">Зарегистрироваться</button>
+                <div className="consent-checkbox">
+                    <input
+                        type="checkbox"
+                        id="consent"
+                        checked={isConsentChecked}
+                        onChange={handleConsentChange}
+                    />
+                    <label htmlFor="consent">
+                        Даю согласие на обработку персональных данных и соглашаюсь с{' '}
+                        <a href="/privacy-policy" target="_blank" className="privacy-link">
+                            политикой конфиденциальности
+                        </a>
+                    </label>
+                </div>
             </form>
             <button className="login-button" onClick={handleLoginClick}>Уже есть аккаунт? Войдите</button>
         </div>

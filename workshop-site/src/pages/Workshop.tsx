@@ -7,7 +7,7 @@ import { userService } from '../services/userService'
 import { orderService } from '../services/orderService'
 
 const Workshop = () => {
-  const { category } = useParams()
+  const { category } = useParams() // category может быть undefined, но проверяется ниже
   const [showOrderForm, setShowOrderForm] = useState(false)
   const [selectedProduct, setSelectedProduct] = useState<Product | null>(null)
   const [products, setProducts] = useState<Product[]>([])
@@ -24,20 +24,24 @@ const Workshop = () => {
     const loadData = async () => {
       if (category) {
         setLoading(true)
-        const [products, categoryInfo] = await Promise.all([
-          workshopService.getProductsByCategory(category),
-          workshopService.getCategoryByName(category)
-        ])
-        setProducts(products)
-        setCategoryData(categoryInfo)
-        setLoading(false)
+        try {
+          const [products, categoryInfo] = await Promise.all([
+            workshopService.getProductsByCategory(category),
+            workshopService.getCategoryByName(category)
+          ])
+          console.log('Loaded products:', products) // Отладка данных
+          setProducts(products)
+          setCategoryData(categoryInfo)
+        } catch (error) {
+          console.error('Error loading data:', error)
+        } finally {
+          setLoading(false)
+        }
       }
     }
 
     loadData()
   }, [category])
-
-
 
   const handleOrder = async (product: Product) => {
     setSelectedProduct(product)
@@ -64,7 +68,7 @@ const Workshop = () => {
       const orderData = {
         user_id: user.id,
         product_id: selectedProduct.id,
-        total_amount: selectedProduct.price,
+        total_amount: selectedProduct.custom_price_text ? 0 : selectedProduct.price, // 0 для текстовой цены
         comment: formData.comment,
         phone: formData.phone,
         name: formData.name,
@@ -78,6 +82,17 @@ const Workshop = () => {
       console.error('Error creating order:', error)
       alert('Ошибка при создании заказа. Попробуйте позже.')
     }
+  }
+
+  const renderPrice = (product: Product) => {
+    if (product.custom_price_text) {
+      return (
+        <span className="text-sm text-gray-300 line-clamp-3">
+          {product.custom_price_text}
+        </span>
+      )
+    }
+    return <span className="text-lg font-bold text-primary">от {product.price} ₽</span>
   }
 
   if (loading) {
@@ -117,9 +132,10 @@ const Workshop = () => {
                 >
                   <div className="aspect-w-16 aspect-h-9">
                     <img
-                      src={product.image}
+                      src={`http://185.178.47.86:8000${product.image}?t=${Date.now()}`}
                       alt={product.name}
-                      className="w-full h-64 object-cover"
+                      className="w-full h-64 object-contain bg-gradient-to-b from-gray-800 to-gray-900"
+                      onError={() => console.error(`Не удалось загрузить изображение: ${product.image}`)}
                     />
                   </div>
                   <div className="p-6">
@@ -127,12 +143,10 @@ const Workshop = () => {
                       {product.name}
                     </h3>
                     <p className="text-gray-300 mb-4 h-20">
-                      {product.description}
+                      {product.description || 'Описание отсутствует'}
                     </p>
                     <div className="flex justify-between items-center">
-                      <span className="text-lg font-bold text-primary">
-                        от {product.price} ₽
-                      </span>
+                      {renderPrice(product)}
                       <button
                         onClick={() => handleOrder(product)}
                         className="p-3 bg-secondary text-white rounded-full hover:bg-orange-600 transition-colors flex items-center justify-center"
@@ -151,6 +165,12 @@ const Workshop = () => {
             <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center p-4 z-50">
               <div className="bg-gray-800 rounded-lg p-6 max-w-md w-full">
                 <h2 className="text-2xl font-bold mb-4 text-white">Оформление заказа</h2>
+                <div className="mb-4">
+                  <p className="text-lg font-semibold text-white">{selectedProduct.name}</p>
+                  <p className="text-gray-300">
+                    {selectedProduct.custom_price_text || `Цена: от ${selectedProduct.price} ₽`}
+                  </p>
+                </div>
                 <form className="space-y-4" onSubmit={handleSubmit}>
                   <div>
                     <label className="block text-sm font-medium text-gray-300 mb-1">
